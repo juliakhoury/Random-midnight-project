@@ -141,186 +141,200 @@
   </div>
 
   <script>
-    /* ===== Only-user-data version ===== */
-    const EMPTY = {5:[],10:[],15:[],20:[],30:[]}; // no defaults
+  /* ===== Only-user-data version with robust persistence ===== */
+  const EMPTY = {5:[],10:[],15:[],20:[],30:[]}; // no defaults
+  const STORAGE_KEY = "breakSlotsData_userOnly_v1";
 
-    const $ = (s,el=document)=>el.querySelector(s);
-    const $$ = (s,el=document)=>Array.from(el.querySelectorAll(s));
+  const $ = (s,el=document)=>el.querySelector(s);
+  const $$ = (s,el=document)=>Array.from(el.querySelectorAll(s));
 
-    function loadData(){
-      const raw = localStorage.getItem("breakSlotsData_userOnly");
-      if(!raw){
-        return structuredClone(EMPTY);
-      }
-      try{
-        const parsed = JSON.parse(raw);
-        // ensure all buckets exist
-        return {
-          5: Array.isArray(parsed["5"])? parsed["5"] : [],
-          10: Array.isArray(parsed["10"])? parsed["10"] : [],
-          15: Array.isArray(parsed["15"])? parsed["15"] : [],
-          20: Array.isArray(parsed["20"])? parsed["20"] : [],
-          30: Array.isArray(parsed["30"])? parsed["30"] : []
-        };
-      }catch(e){
-        console.warn("Bad stored data, resetting.", e);
-        return structuredClone(EMPTY);
-      }
-    }
-    function saveData(d){
-      localStorage.setItem("breakSlotsData_userOnly", JSON.stringify(d));
-    }
+  function storageOK(){
+    try {
+      const t="__test__";
+      localStorage.setItem(t,"1");
+      localStorage.removeItem(t);
+      return true;
+    } catch(e){ return false; }
+  }
+  const STORAGE_WORKS = storageOK();
 
-    let DATA = loadData();
-    const timeBuckets = [5,10,15,20,30];
-    let selectedTime = 10;
-    let timerId=null, endsAt=null;
-
-    function makeChips(){
-      const row = $("#timeChips");
-      row.innerHTML="";
-      timeBuckets.forEach(min=>{
-        const b=document.createElement("button");
-        b.className="chip"; b.type="button";
-        b.textContent = (min===30) ? "30+ min" : `${min} min`;
-        b.setAttribute("aria-pressed", String(min===selectedTime));
-        b.addEventListener("click", ()=>{
-          selectedTime=min;
-          $$(".chip",row).forEach(c=>c.setAttribute("aria-pressed","false"));
-          b.setAttribute("aria-pressed","true");
-          updateSelectedTime();
-          spin();
-        });
-        row.appendChild(b);
-      });
-      updateSelectedTime();
-    }
-    function updateSelectedTime(){
-      $("#selectedTime").textContent = (selectedTime===30) ? "30+ minutes" : `${selectedTime} minutes`;
-    }
-
-    const rand = arr => arr[Math.floor(Math.random()*arr.length)];
-
-    function pickFromBucket(min){
-      const pool = DATA[String(min)] || [];
-      return pool.length ? rand(pool) : "No activities yet for this time. Add one below ↓";
-    }
-
-    function animateSlot(el, finalText){
-      const pool = DATA[String(selectedTime)] || [];
-      if(!pool.length){ el.textContent = finalText; return; } // no animation if no items yet
-      let i=0, start=performance.now(), spinTime=600+Math.random()*400;
-      const tick = now=>{
-        const t = now - start;
-        if(t < spinTime){
-          el.style.transform = (i%2===0) ? "translateY(2px)" : "translateY(0)";
-          el.textContent = rand(pool);
-          i++; requestAnimationFrame(tick);
-        } else {
-          el.style.transform = "translateY(0)"; el.textContent = finalText;
-        }
+  function loadData(){
+    if(!STORAGE_WORKS) return structuredClone(EMPTY);
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return structuredClone(EMPTY);
+    try{
+      const p = JSON.parse(raw);
+      return {
+        5: Array.isArray(p["5"])? p["5"] : [],
+        10: Array.isArray(p["10"])? p["10"] : [],
+        15: Array.isArray(p["15"])? p["15"] : [],
+        20: Array.isArray(p["20"])? p["20"] : [],
+        30: Array.isArray(p["30"])? p["30"] : []
       };
-      requestAnimationFrame(tick);
-    }
-
-    function spin(){
-      const el = $("#slot0");
-      const text = pickFromBucket(selectedTime);
-      animateSlot(el, text);
-    }
-
-    // Timer
-    function startTimer(){
-      clearTimer();
-      const minutes = selectedTime===30 ? 30 : selectedTime;
-      endsAt = Date.now() + minutes*60*1000;
-      tickTimer();
-      timerId = setInterval(tickTimer, 500);
-      if("vibrate" in navigator) try{navigator.vibrate(30)}catch{}
-    }
-    function tickTimer(){
-      const left = Math.max(0, endsAt - Date.now());
-      const mm = String(Math.floor(left/60000)).padStart(2,"0");
-      const ss = String(Math.floor((left%60000)/1000)).padStart(2,"0");
-      $("#countdown").textContent = `${mm}:${ss}`;
-      if(left<=0){
-        clearTimer();
-        document.title="⏱️ Break done!";
-        if("vibrate" in navigator) try{navigator.vibrate([80,60,80])}catch{}
-        alert("Time's up! Nice break ✨");
-      }
-    }
-    function clearTimer(){
-      if(timerId) clearInterval(timerId);
-      timerId=null; endsAt=null;
-      $("#countdown").textContent="00:00";
-      document.title="Break Slots — One Pick";
-    }
-
-    // Add / Export / Import / Reset
-    function addItem(){
-      const text = $("#newItem").value.trim();
-      const mins = parseInt($("#newMinutes").value,10);
-      if(!text){ $("#newItem").focus(); return; }
-      const k = String(mins);
-      const set = new Set([...(DATA[k]||[]) , text]);
-      DATA[k] = Array.from(set);
-      saveData(DATA);
-      $("#newItem").value="";
-      selectedTime = mins;
-      $$(".chip").forEach(c=>c.setAttribute("aria-pressed","false"));
-      $$(".chip").find(c=>c.textContent.includes(mins===30?"30+":String(mins)))?.setAttribute("aria-pressed","true");
-      updateSelectedTime();
-      spin();
-    }
-
-    function exportData(){
-      const blob = new Blob([JSON.stringify(DATA,null,2)], {type:"application/json"});
+    }catch{ return structuredClone(EMPTY); }
+  }
+  function saveData(d){
+    if(STORAGE_WORKS){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(d));
+    } else {
+      // Fallback: auto download a backup so you don’t lose items
+      const blob = new Blob([JSON.stringify(d,null,2)], {type:"application/json"});
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href=url; a.download="my-break-activities.json"; a.click();
-      setTimeout(()=>URL.revokeObjectURL(url), 2000);
+      a.href = url; a.download = "my-break-activities-backup.json"; a.click();
+      setTimeout(()=>URL.revokeObjectURL(url), 1500);
     }
-    function importData(file){
-      const r = new FileReader();
-      r.onload = ()=>{
-        try{
-          const parsed = JSON.parse(r.result);
-          // Only accept the same bucket keys
-          ["5","10","15","20","30"].forEach(k=>{
-            const arr = Array.isArray(parsed[k]) ? parsed[k] : [];
-            DATA[k] = Array.from(new Set([...(DATA[k]||[]), ...arr]));
-          });
-          saveData(DATA);
-          spin();
-          alert("Imported ✅");
-        }catch(e){ alert("Invalid JSON file."); }
-      };
-      r.readAsText(file);
-    }
-    function resetData(){
-      if(!confirm("Clear ALL my activities?")) return;
-      DATA = structuredClone(EMPTY);
-      saveData(DATA);
-      $("#slot0").textContent = "Add an activity below ↓";
-    }
+  }
 
-    // Events
-    $("#spin").addEventListener("click", spin);
-    $("#spinSecondary").addEventListener("click", spin);
-    $("#startTimer").addEventListener("click", startTimer);
-    $("#clearTimer").addEventListener("click", clearTimer);
-    $("#addItem").addEventListener("click", addItem);
-    $("#exportBtn").addEventListener("click", exportData);
-    $("#importBtn").addEventListener("click", ()=>$("#importInput").click());
-    $("#importInput").addEventListener("change", e=>{
-      const f = e.target.files?.[0]; if(f) importData(f); e.target.value="";
+  let DATA = loadData();
+  const timeBuckets = [5,10,15,20,30];
+  let selectedTime = 10;
+  let timerId=null, endsAt=null;
+
+  if(!STORAGE_WORKS){
+    setTimeout(()=>alert(
+      "Heads up: persistent storage is disabled (Private mode or blocking cookies). " +
+      "Your items won’t survive a close unless you keep the auto-backup files."
+    ), 50);
+  }
+
+  function makeChips(){
+    const row = $("#timeChips");
+    row.innerHTML="";
+    timeBuckets.forEach(min=>{
+      const b=document.createElement("button");
+      b.className="chip"; b.type="button";
+      b.textContent = (min===30) ? "30+ min" : `${min} min`;
+      b.setAttribute("aria-pressed", String(min===selectedTime));
+      b.addEventListener("click", ()=>{
+        selectedTime=min;
+        $$(".chip",row).forEach(c=>c.setAttribute("aria-pressed","false"));
+        b.setAttribute("aria-pressed","true");
+        updateSelectedTime();
+        spin();
+      });
+      row.appendChild(b);
     });
-    $("#resetBtn").addEventListener("click", resetData);
+    updateSelectedTime();
+  }
+  function updateSelectedTime(){
+    $("#selectedTime").textContent = (selectedTime===30) ? "30+ minutes" : `${selectedTime} minutes`;
+  }
 
-    // Init
-    makeChips();
-    spin(); // show something (or prompt) on load
-  </script>
+  const rand = arr => arr[Math.floor(Math.random()*arr.length)];
+  function pickFromBucket(min){
+    const pool = DATA[String(min)] || [];
+    return pool.length ? rand(pool) : "No activities yet for this time. Add one below ↓";
+  }
+  function animateSlot(el, finalText){
+    const pool = DATA[String(selectedTime)] || [];
+    if(!pool.length){ el.textContent = finalText; return; }
+    let i=0, start=performance.now(), spinTime=600+Math.random()*400;
+    const tick = now=>{
+      const t = now - start;
+      if(t < spinTime){
+        el.style.transform = (i%2===0) ? "translateY(2px)" : "translateY(0)";
+        el.textContent = rand(pool);
+        i++; requestAnimationFrame(tick);
+      } else { el.style.transform = "translateY(0)"; el.textContent = finalText; }
+    };
+    requestAnimationFrame(tick);
+  }
+  function spin(){
+    const el = $("#slot0");
+    const text = pickFromBucket(selectedTime);
+    animateSlot(el, text);
+  }
+
+  // Timer
+  function startTimer(){
+    clearTimer();
+    const minutes = selectedTime===30 ? 30 : selectedTime;
+    endsAt = Date.now() + minutes*60*1000;
+    tickTimer();
+    timerId = setInterval(tickTimer, 500);
+    if("vibrate" in navigator) try{navigator.vibrate(30)}catch{}
+  }
+  function tickTimer(){
+    const left = Math.max(0, endsAt - Date.now());
+    const mm = String(Math.floor(left/60000)).padStart(2,"0");
+    const ss = String(Math.floor((left%60000)/1000)).padStart(2,"0");
+    $("#countdown").textContent = `${mm}:${ss}`;
+    if(left<=0){
+      clearTimer();
+      document.title="⏱️ Break done!";
+      if("vibrate" in navigator) try{navigator.vibrate([80,60,80])}catch{}
+      alert("Time's up! Nice break ✨");
+    }
+  }
+  function clearTimer(){
+    if(timerId) clearInterval(timerId);
+    timerId=null; endsAt=null;
+    $("#countdown").textContent="00:00";
+    document.title="Break Slots — One Pick";
+  }
+
+  // Add / Export / Import / Reset
+  function addItem(){
+    const text = $("#newItem").value.trim();
+    const mins = parseInt($("#newMinutes").value,10);
+    if(!text){ $("#newItem").focus(); return; }
+    const k = String(mins);
+    DATA[k] = Array.from(new Set([...(DATA[k]||[]), text]));
+    saveData(DATA);                 // <- persist immediately
+    $("#newItem").value="";
+    selectedTime = mins;
+    $$(".chip").forEach(c=>c.setAttribute("aria-pressed","false"));
+    $$(".chip").find(c=>c.textContent.includes(mins===30?"30+":String(mins)))?.setAttribute("aria-pressed","true");
+    updateSelectedTime();
+    spin();
+  }
+  function exportData(){
+    const blob = new Blob([JSON.stringify(DATA,null,2)], {type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href=url; a.download="my-break-activities.json"; a.click();
+    setTimeout(()=>URL.revokeObjectURL(url), 1500);
+  }
+  function importData(file){
+    const r = new FileReader();
+    r.onload = ()=>{
+      try{
+        const parsed = JSON.parse(r.result);
+        ["5","10","15","20","30"].forEach(k=>{
+          const arr = Array.isArray(parsed[k]) ? parsed[k] : [];
+          DATA[k] = Array.from(new Set([...(DATA[k]||[]), ...arr]));
+        });
+        saveData(DATA);
+        spin();
+        alert("Imported ✅");
+      }catch(e){ alert("Invalid JSON file."); }
+    };
+    r.readAsText(file);
+  }
+  function resetData(){
+    if(!confirm("Clear ALL my activities?")) return;
+    DATA = structuredClone(EMPTY);
+    saveData(DATA);
+    $("#slot0").textContent = "Add an activity below ↓";
+  }
+
+  // Events
+  $("#spin").addEventListener("click", spin);
+  $("#spinSecondary").addEventListener("click", spin);
+  $("#startTimer").addEventListener("click", startTimer);
+  $("#clearTimer").addEventListener("click", clearTimer);
+  $("#addItem").addEventListener("click", addItem);
+  $("#exportBtn").addEventListener("click", exportData);
+  $("#importBtn").addEventListener("click", ()=>$("#importInput").click());
+  $("#importInput").addEventListener("change", e=>{
+    const f = e.target.files?.[0]; if(f) importData(f); e.target.value="";
+  });
+  $("#resetBtn").addEventListener("click", resetData);
+
+  // Init
+  makeChips();
+  spin();
+</script>
 </body>
 </html>
