@@ -1,6 +1,5 @@
 
-# Create a self-contained mobile-friendly "Break Slots" website as a single HTML file.
-html = r"""<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -43,20 +42,9 @@ html = r"""<!DOCTYPE html>
       color: var(--text);
       -webkit-tap-highlight-color: transparent;
     }
-    .wrap{
-      max-width: 780px;
-      margin: 0 auto;
-      padding: clamp(16px, 4vw, 32px);
-    }
-    header{
-      display:flex; align-items:center; justify-content:space-between; gap: 12px;
-      margin-bottom: 14px;
-    }
-    h1{
-      font-size: clamp(20px, 4.5vw, 28px);
-      margin:0;
-      letter-spacing:.2px;
-    }
+    .wrap{ max-width: 780px; margin: 0 auto; padding: clamp(16px, 4vw, 32px); }
+    header{ display:flex; align-items:center; justify-content:space-between; gap: 12px; margin-bottom: 14px; }
+    h1{ font-size: clamp(20px, 4.5vw, 28px); margin:0; letter-spacing:.2px; }
     .sub{ color: var(--muted); font-size: 13px; margin-top:4px }
     .card{
       background: var(--card);
@@ -64,93 +52,46 @@ html = r"""<!DOCTYPE html>
       box-shadow: var(--shadow);
       border-radius: var(--radius);
     }
-    .time-row{
-      display:flex; flex-wrap:wrap; gap: 8px;
-      padding: 10px;
-    }
+    .time-row{ display:flex; flex-wrap:wrap; gap: 8px; padding: 10px; }
     .chip{
-      user-select:none;
-      padding: 10px 14px;
-      font-weight: 600;
-      border-radius: 12px;
+      user-select:none; padding: 10px 14px; font-weight: 600; border-radius: 12px;
       border: 1px solid rgba(255,255,255,.08);
       background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.03));
-      color: var(--text);
-      cursor: pointer;
-      box-shadow: 0 2px 0 rgba(0,0,0,.12);
-      transition: transform .08s ease, box-shadow .08s ease, border-color .2s ease;
-      outline: none;
+      color: var(--text); cursor: pointer; box-shadow: 0 2px 0 rgba(0,0,0,.12);
+      transition: transform .08s ease, box-shadow .08s ease, border-color .2s ease; outline: none;
     }
-    .chip[aria-pressed="true"]{
-      border-color: var(--accent);
-      box-shadow: 0 0 0 6px var(--ring);
-    }
+    .chip[aria-pressed="true"]{ border-color: var(--accent); box-shadow: 0 0 0 6px var(--ring); }
     .chip:active{ transform: translateY(1px); }
-    .slots{
-      display:grid; grid-template-columns: 1fr; gap: 12px; padding: 12px;
-    }
-    @media (min-width: 520px){
-      .slots{ grid-template-columns: 1fr 1fr 1fr; }
-    }
+    .slots{ display:grid; grid-template-columns: 1fr; gap: 12px; padding: 12px; }
     .slot{
-      position: relative; overflow:hidden; min-height: 110px;
-      border-radius: 14px;
+      position: relative; overflow:hidden; min-height: 110px; border-radius: 14px;
       background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.06));
       border: 1px dashed rgba(255,255,255,.15);
-      display:flex; align-items:center; justify-content:center; padding: 14px;
-      text-align:center;
-      isolation: isolate;
+      display:flex; align-items:center; justify-content:center; padding: 14px; text-align:center; isolation: isolate;
     }
-    .slot h3{
-      position:absolute; top:8px; left:10px; margin:0; font-size: 12px; color: var(--muted); letter-spacing:.3px;
-    }
-    .slot .value{
-      font-size: clamp(16px, 3.9vw, 22px);
-      font-weight: 800; line-height: 1.25;
-    }
-    .slot .ghost{
-      position:absolute; inset:0; opacity:.12; filter: blur(10px);
-      background: radial-gradient(300px 120px at 50% -20%, var(--accent), transparent 50%);
-      pointer-events:none;
-    }
-    .controls{
-      display:flex; gap: 10px; padding: 12px; flex-wrap:wrap; align-items:center;
-    }
+    .slot h3{ position:absolute; top:8px; left:10px; margin:0; font-size: 12px; color: var(--muted); letter-spacing:.3px; }
+    .slot .value{ font-size: clamp(16px, 3.9vw, 22px); font-weight: 800; line-height: 1.25; }
+    .slot .ghost{ position:absolute; inset:0; opacity:.12; filter: blur(10px);
+      background: radial-gradient(300px 120px at 50% -20%, var(--accent), transparent 50%); pointer-events:none; }
+    .controls{ display:flex; gap: 10px; padding: 12px; flex-wrap:wrap; align-items:center; }
     button{
       border:0; border-radius: 12px; padding: 12px 14px; font-weight:700; cursor:pointer;
-      background: linear-gradient(180deg, var(--accent), var(--accent-2));
-      color: #fff;
-      box-shadow: 0 8px 20px rgba(0,0,0,.25);
+      background: linear-gradient(180deg, var(--accent), var(--accent-2)); color: #fff; box-shadow: 0 8px 20px rgba(0,0,0,.25);
       transition: transform .06s ease;
     }
     button:active{ transform: translateY(1px); }
-    .ghost-btn{
-      background: transparent; color: var(--text);
-      border: 1px solid rgba(255,255,255,.12);
-    }
+    .ghost-btn{ background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,.12); }
     .danger{ background: linear-gradient(180deg, var(--danger), #b91c1c); }
-    .row{
-      display:flex; gap:12px; padding: 12px; flex-wrap: wrap;
-    }
+    .row{ display:flex; gap:12px; padding: 12px; flex-wrap: wrap; }
     input, select, textarea{
-      width:100%; padding: 12px 12px; border-radius: 12px;
-      border:1px solid rgba(255,255,255,.12);
-      background: transparent; color: var(--text);
-      outline:none;
+      width:100%; padding: 12px 12px; border-radius: 12px; border:1px solid rgba(255,255,255,.12);
+      background: transparent; color: var(--text); outline:none;
     }
-    input:focus, select:focus, textarea:focus{
-      box-shadow: 0 0 0 6px var(--ring); border-color: var(--accent);
-    }
+    input:focus, select:focus, textarea:focus{ box-shadow: 0 0 0 6px var(--ring); border-color: var(--accent); }
     label{ font-size: 12px; color: var(--muted); display:block; margin-bottom:6px }
-    .timer{
-      display:flex; align-items:center; justify-content:space-between;
-      padding: 12px;
-      border-top: 1px dashed rgba(255,255,255,.14);
-    }
-    .clock{
-      font-variant-numeric: tabular-nums;
-      font-weight: 800; letter-spacing:.5px;
-    }
+    .timer{ display:flex; align-items:center; justify-content:space-between; padding: 12px;
+      border-top: 1px dashed rgba(255,255,255,.14); }
+    .clock{ font-variant-numeric: tabular-nums; font-weight: 800; letter-spacing:.5px; }
     .small{ font-size: 12px; color: var(--muted) }
     footer{ text-align:center; color: var(--muted); font-size: 12px; margin-top: 14px }
     .link{ color: var(--accent) }
@@ -161,41 +102,27 @@ html = r"""<!DOCTYPE html>
     <header>
       <div>
         <h1>Break Slots</h1>
-        <div class="sub">Tap a time, spin the slots, pick an activity. Quick and fun.</div>
+        <div class="sub">Tap a time, spin, get one activity. Simple.</div>
       </div>
-      <button id="spinAll" aria-label="Spin all slots">🎰 Spin</button>
+      <button id="spin" aria-label="Spin">🎰 Spin</button>
     </header>
 
     <!-- TIME FILTERS -->
     <section class="card" aria-label="Time options">
-      <div class="time-row" id="timeChips">
-        <!-- chips injected -->
-      </div>
+      <div class="time-row" id="timeChips"></div>
 
-      <!-- SLOTS -->
+      <!-- ONE SLOT -->
       <div class="slots">
-        <div class="slot" data-slot="0" aria-live="polite">
+        <div class="slot" aria-live="polite">
           <div class="ghost"></div>
-          <h3>Slot A</h3>
+          <h3>Activity</h3>
           <div class="value" id="slot0">—</div>
-        </div>
-        <div class="slot" data-slot="1" aria-live="polite">
-          <div class="ghost"></div>
-          <h3>Slot B</h3>
-          <div class="value" id="slot1">—</div>
-        </div>
-        <div class="slot" data-slot="2" aria-live="polite">
-          <div class="ghost"></div>
-          <h3>Slot C</h3>
-          <div class="value" id="slot2">—</div>
         </div>
       </div>
 
       <!-- CONTROLS -->
       <div class="controls">
-        <button id="spinA" class="ghost-btn">Spin A</button>
-        <button id="spinB" class="ghost-btn">Spin B</button>
-        <button id="spinC" class="ghost-btn">Spin C</button>
+        <button id="spinSecondary" class="ghost-btn">Spin</button>
         <button id="startTimer">⏱️ Start Timer</button>
         <button id="clearTimer" class="ghost-btn">Clear Timer</button>
       </div>
@@ -290,7 +217,7 @@ html = r"""<!DOCTYPE html>
       ],
       20: [
         "Do a full mobility flow",
-        "Prep tomorrow’s to‑do list",
+        "Prep tomorrow’s to-do list",
         "Tackle a nagging task",
         "Watch an educational short video",
         "Deep clean a small area",
@@ -314,7 +241,7 @@ html = r"""<!DOCTYPE html>
       ]
     };
 
-    const timeBuckets = [5, 10, 15, 20, 30]; // minutes categories
+    const timeBuckets = [5, 10, 15, 20, 30];
 
     const $ = (sel, el=document) => el.querySelector(sel);
     const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
@@ -324,7 +251,6 @@ html = r"""<!DOCTYPE html>
       if(!raw) return structuredClone(DEFAULTS);
       try {
         const parsed = JSON.parse(raw);
-        // Merge to keep new defaults without deleting user data
         const merged = structuredClone(DEFAULTS);
         for (const k of Object.keys(parsed)){
           const key = String(k);
@@ -336,12 +262,10 @@ html = r"""<!DOCTYPE html>
         return structuredClone(DEFAULTS);
       }
     }
-    function saveData(data){
-      localStorage.setItem("breakSlotsData", JSON.stringify(data));
-    }
+    function saveData(data){ localStorage.setItem("breakSlotsData", JSON.stringify(data)); }
 
     let DATA = loadData();
-    let selectedTime = 10; // default selected
+    let selectedTime = 10;
     let timerId = null;
     let endsAt = null;
 
@@ -360,8 +284,7 @@ html = r"""<!DOCTYPE html>
           $$(".chip", row).forEach(c => c.setAttribute("aria-pressed","false"));
           btn.setAttribute("aria-pressed","true");
           updateSelectedTime();
-          // auto spin a slot to give feedback
-          spinAll();
+          spin(); // auto spin one activity
         });
         row.appendChild(btn);
       });
@@ -372,9 +295,7 @@ html = r"""<!DOCTYPE html>
       $("#selectedTime").textContent = (selectedTime === 30) ? "30+ minutes" : `${selectedTime} minutes`;
     }
 
-    function rand(arr){
-      return arr[Math.floor(Math.random() * arr.length)];
-    }
+    function rand(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
 
     function pickFromBucket(min){
       const pool = DATA[String(min)] || [];
@@ -383,21 +304,15 @@ html = r"""<!DOCTYPE html>
     }
 
     function animateSlot(el, finalText){
-      // Simple slot-like animation using increments of random items
       let i = 0;
       const spinTime = 600 + Math.random() * 400;
       const start = performance.now();
       const tick = (now) => {
         const t = now - start;
         if (t < spinTime){
-          if (i % 2 === 0) {
-            el.style.transform = "translateY(2px)";
-          } else {
-            el.style.transform = "translateY(0)";
-          }
+          el.style.transform = (i % 2 === 0) ? "translateY(2px)" : "translateY(0)";
           el.textContent = rand(DATA[String(selectedTime)]) || finalText;
-          i++;
-          requestAnimationFrame(tick);
+          i++; requestAnimationFrame(tick);
         } else {
           el.style.transform = "translateY(0)";
           el.textContent = finalText;
@@ -406,14 +321,10 @@ html = r"""<!DOCTYPE html>
       requestAnimationFrame(tick);
     }
 
-    function spin(slotIndex){
-      const valueEl = $("#slot"+slotIndex);
+    function spin(){
+      const valueEl = $("#slot0");
       const text = pickFromBucket(selectedTime);
       animateSlot(valueEl, text);
-    }
-
-    function spinAll(){
-      spin(0); setTimeout(()=>spin(1), 120); setTimeout(()=>spin(2), 240);
     }
 
     // Timer
@@ -423,7 +334,6 @@ html = r"""<!DOCTYPE html>
       endsAt = Date.now() + minutes * 60 * 1000;
       tickTimer();
       timerId = setInterval(tickTimer, 500);
-      // vibrate if supported
       if ("vibrate" in navigator) try { navigator.vibrate(30); } catch {}
     }
     function tickTimer(){
@@ -433,7 +343,6 @@ html = r"""<!DOCTYPE html>
       $("#countdown").textContent = `${mm}:${ss}`;
       if (left <= 0){
         clearTimer();
-        // gentle alert
         document.title = "⏱️ Break done!";
         if ("vibrate" in navigator) try { navigator.vibrate([80, 60, 80]); } catch {}
         alert("Time's up! Nice break ✨");
@@ -441,8 +350,7 @@ html = r"""<!DOCTYPE html>
     }
     function clearTimer(){
       if (timerId) clearInterval(timerId);
-      timerId = null;
-      endsAt = null;
+      timerId = null; endsAt = null;
       $("#countdown").textContent = "00:00";
       document.title = "Break Slots — What to do on my break";
     }
@@ -452,9 +360,7 @@ html = r"""<!DOCTYPE html>
       const blob = new Blob([JSON.stringify(DATA, null, 2)], {type:"application/json"});
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = url;
-      a.download = "break-slots-activities.json";
-      a.click();
+      a.href = url; a.download = "break-slots-activities.json"; a.click();
       setTimeout(()=>URL.revokeObjectURL(url), 3000);
     }
     function importData(file){
@@ -468,7 +374,7 @@ html = r"""<!DOCTYPE html>
             DATA[key] = Array.from(new Set([...(DATA[key] || []), ...arr]));
           }
           saveData(DATA);
-          spinAll();
+          spin();
           alert("Imported activities successfully ✅");
         } catch(e){
           alert("Could not import that file. Make sure it's a JSON export created by this app.");
@@ -480,7 +386,7 @@ html = r"""<!DOCTYPE html>
       if (!confirm("Reset to default activities? This keeps your timer and settings but removes your custom items.")) return;
       DATA = structuredClone(DEFAULTS);
       saveData(DATA);
-      spinAll();
+      spin();
     }
 
     function addItem(){
@@ -492,16 +398,16 @@ html = r"""<!DOCTYPE html>
       saveData(DATA);
       $("#newItem").value = "";
       selectedTime = mins;
-      $$(".chip").forEach(c => c.setAttribute("aria-pressed", String(c.textContent.includes(String(mins)))));
+      $$(".chip").forEach(c => c.setAttribute("aria-pressed", "false"));
+      // set the matching chip active
+      $$(".chip").find(c => c.textContent.includes(mins === 30 ? "30+" : String(mins)))?.setAttribute("aria-pressed","true");
       updateSelectedTime();
-      spinAll();
+      spin();
     }
 
     // Hook up events
-    $("#spinAll").addEventListener("click", spinAll);
-    $("#spinA").addEventListener("click", () => spin(0));
-    $("#spinB").addEventListener("click", () => spin(1));
-    $("#spinC").addEventListener("click", () => spin(2));
+    $("#spin").addEventListener("click", spin);
+    $("#spinSecondary").addEventListener("click", spin);
     $("#startTimer").addEventListener("click", startTimer);
     $("#clearTimer").addEventListener("click", clearTimer);
     $("#addItem").addEventListener("click", addItem);
@@ -516,8 +422,7 @@ html = r"""<!DOCTYPE html>
 
     // Init
     makeChips();
-    spinAll();
+    spin();
   </script>
 </body>
 </html>
-
