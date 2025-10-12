@@ -4,97 +4,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Break Slots — What to do on my break</title>
+  <title>Break Slots — One Pick</title>
   <meta name="theme-color" content="#0f172a" />
   <style>
     :root{
-      --bg: #0b1020;
-      --card: #111836;
-      --muted: #9aa5b1;
-      --text: #ffffff;
-      --accent: #58e1c1;
-      --accent-2: #9b9dfc;
-      --danger: #ff6961;
-      --ring: rgba(88, 225, 193, .35);
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 14px;
+      --bg:#0b1020;--card:#111836;--muted:#9aa5b1;--text:#fff;
+      --accent:#58e1c1;--accent-2:#9b9dfc;--danger:#ff6961;--ring:rgba(88,225,193,.35);
+      --shadow:0 10px 30px rgba(0,0,0,.35);--radius:14px
     }
     @media (prefers-color-scheme: light){
-      :root{
-        --bg: #f7f7fb;
-        --card: #ffffff;
-        --muted: #6b7280;
-        --text: #0f172a;
-        --accent: #0891b2;
-        --accent-2: #7c3aed;
-        --danger: #dc2626;
-        --ring: rgba(8, 145, 178, .18);
-        --shadow: 0 10px 30px rgba(0,0,0,.10);
-      }
+      :root{--bg:#f7f7fb;--card:#fff;--muted:#6b7280;--text:#0f172a;
+        --accent:#0891b2;--accent-2:#7c3aed;--danger:#dc2626;--ring:rgba(8,145,178,.18);
+        --shadow:0 10px 30px rgba(0,0,0,.10)}
     }
-    *{ box-sizing: border-box; }
-    html, body { height: 100%; }
+    *{box-sizing:border-box} html,body{height:100%}
     body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      background: radial-gradient(1200px 600px at 70% -10%, rgba(88,225,193,.12), transparent 60%),
-                  radial-gradient(1200px 600px at 10% 100%, rgba(155,157,252,.12), transparent 60%), var(--bg);
-      color: var(--text);
-      -webkit-tap-highlight-color: transparent;
+      margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      background:radial-gradient(1200px 600px at 70% -10%,rgba(88,225,193,.12),transparent 60%),
+                 radial-gradient(1200px 600px at 10% 100%,rgba(155,157,252,.12),transparent 60%),var(--bg);
+      color:var(--text);-webkit-tap-highlight-color:transparent
     }
-    .wrap{ max-width: 780px; margin: 0 auto; padding: clamp(16px, 4vw, 32px); }
-    header{ display:flex; align-items:center; justify-content:space-between; gap: 12px; margin-bottom: 14px; }
-    h1{ font-size: clamp(20px, 4.5vw, 28px); margin:0; letter-spacing:.2px; }
-    .sub{ color: var(--muted); font-size: 13px; margin-top:4px }
-    .card{
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,.06);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-    }
-    .time-row{ display:flex; flex-wrap:wrap; gap: 8px; padding: 10px; }
+    .wrap{max-width:780px;margin:0 auto;padding:clamp(16px,4vw,32px)}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+    h1{font-size:clamp(20px,4.5vw,28px);margin:0}
+    .sub{color:var(--muted);font-size:13px;margin-top:4px}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);box-shadow:var(--shadow);border-radius:var(--radius)}
+    .time-row{display:flex;flex-wrap:wrap;gap:8px;padding:10px}
     .chip{
-      user-select:none; padding: 10px 14px; font-weight: 600; border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.08);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.03));
-      color: var(--text); cursor: pointer; box-shadow: 0 2px 0 rgba(0,0,0,.12);
-      transition: transform .08s ease, box-shadow .08s ease, border-color .2s ease; outline: none;
+      user-select:none;padding:10px 14px;font-weight:600;border-radius:12px;border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.03));color:var(--text);cursor:pointer;
+      box-shadow:0 2px 0 rgba(0,0,0,.12);transition:transform .08s, box-shadow .08s, border-color .2s;outline:none
     }
-    .chip[aria-pressed="true"]{ border-color: var(--accent); box-shadow: 0 0 0 6px var(--ring); }
-    .chip:active{ transform: translateY(1px); }
-    .slots{ display:grid; grid-template-columns: 1fr; gap: 12px; padding: 12px; }
+    .chip[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 6px var(--ring)}
+    .chip:active{transform:translateY(1px)}
+    .slots{display:grid;grid-template-columns:1fr;gap:12px;padding:12px}
     .slot{
-      position: relative; overflow:hidden; min-height: 110px; border-radius: 14px;
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.06));
-      border: 1px dashed rgba(255,255,255,.15);
-      display:flex; align-items:center; justify-content:center; padding: 14px; text-align:center; isolation: isolate;
+      position:relative;overflow:hidden;min-height:120px;border-radius:14px;
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.06));
+      border:1px dashed rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;
+      padding:14px;text-align:center;isolation:isolate
     }
-    .slot h3{ position:absolute; top:8px; left:10px; margin:0; font-size: 12px; color: var(--muted); letter-spacing:.3px; }
-    .slot .value{ font-size: clamp(16px, 3.9vw, 22px); font-weight: 800; line-height: 1.25; }
-    .slot .ghost{ position:absolute; inset:0; opacity:.12; filter: blur(10px);
-      background: radial-gradient(300px 120px at 50% -20%, var(--accent), transparent 50%); pointer-events:none; }
-    .controls{ display:flex; gap: 10px; padding: 12px; flex-wrap:wrap; align-items:center; }
+    .slot h3{position:absolute;top:8px;left:10px;margin:0;font-size:12px;color:var(--muted);letter-spacing:.3px}
+    .value{font-size:clamp(18px,4.2vw,24px);font-weight:800;line-height:1.25}
+    .ghost{position:absolute;inset:0;opacity:.12;filter:blur(10px);
+      background:radial-gradient(300px 120px at 50% -20%,var(--accent),transparent 50%);pointer-events:none}
+    .controls{display:flex;gap:10px;padding:12px;flex-wrap:wrap;align-items:center}
     button{
-      border:0; border-radius: 12px; padding: 12px 14px; font-weight:700; cursor:pointer;
-      background: linear-gradient(180deg, var(--accent), var(--accent-2)); color: #fff; box-shadow: 0 8px 20px rgba(0,0,0,.25);
-      transition: transform .06s ease;
+      border:0;border-radius:12px;padding:12px 14px;font-weight:700;cursor:pointer;
+      background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 8px 20px rgba(0,0,0,.25);
+      transition:transform .06s ease
     }
-    button:active{ transform: translateY(1px); }
-    .ghost-btn{ background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,.12); }
-    .danger{ background: linear-gradient(180deg, var(--danger), #b91c1c); }
-    .row{ display:flex; gap:12px; padding: 12px; flex-wrap: wrap; }
-    input, select, textarea{
-      width:100%; padding: 12px 12px; border-radius: 12px; border:1px solid rgba(255,255,255,.12);
-      background: transparent; color: var(--text); outline:none;
-    }
-    input:focus, select:focus, textarea:focus{ box-shadow: 0 0 0 6px var(--ring); border-color: var(--accent); }
-    label{ font-size: 12px; color: var(--muted); display:block; margin-bottom:6px }
-    .timer{ display:flex; align-items:center; justify-content:space-between; padding: 12px;
-      border-top: 1px dashed rgba(255,255,255,.14); }
-    .clock{ font-variant-numeric: tabular-nums; font-weight: 800; letter-spacing:.5px; }
-    .small{ font-size: 12px; color: var(--muted) }
-    footer{ text-align:center; color: var(--muted); font-size: 12px; margin-top: 14px }
-    .link{ color: var(--accent) }
+    button:active{transform:translateY(1px)}
+    .ghost-btn{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.12)}
+    .danger{background:linear-gradient(180deg,var(--danger),#b91c1c)}
+    .row{display:flex;gap:12px;padding:12px;flex-wrap:wrap}
+    input,select{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--text);outline:none}
+    input:focus,select:focus{box-shadow:0 0 0 6px var(--ring);border-color:var(--accent)}
+    label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px}
+    .timer{display:flex;align-items:center;justify-content:space-between;padding:12px;border-top:1px dashed rgba(255,255,255,.14)}
+    .clock{font-variant-numeric:tabular-nums;font-weight:800;letter-spacing:.5px}
+    .small{font-size:12px;color:var(--muted)}
+    footer{text-align:center;color:var(--muted);font-size:12px;margin-top:14px}
   </style>
 </head>
 <body>
@@ -102,32 +72,28 @@
     <header>
       <div>
         <h1>Break Slots</h1>
-        <div class="sub">Tap a time, spin, get one activity. Simple.</div>
+        <div class="sub">Pick a time → Spin → Do one thing. Only your activities are used.</div>
       </div>
       <button id="spin" aria-label="Spin">🎰 Spin</button>
     </header>
 
-    <!-- TIME FILTERS -->
     <section class="card" aria-label="Time options">
       <div class="time-row" id="timeChips"></div>
 
-      <!-- ONE SLOT -->
       <div class="slots">
         <div class="slot" aria-live="polite">
           <div class="ghost"></div>
           <h3>Activity</h3>
-          <div class="value" id="slot0">—</div>
+          <div class="value" id="slot0">Add an activity below ↓</div>
         </div>
       </div>
 
-      <!-- CONTROLS -->
       <div class="controls">
         <button id="spinSecondary" class="ghost-btn">Spin</button>
         <button id="startTimer">⏱️ Start Timer</button>
         <button id="clearTimer" class="ghost-btn">Clear Timer</button>
       </div>
 
-      <!-- TIMER -->
       <div class="timer">
         <div>
           <div class="small">Selected time</div>
@@ -140,7 +106,6 @@
       </div>
     </section>
 
-    <!-- ADD / MANAGE -->
     <section class="card" style="margin-top:14px">
       <div class="row">
         <div style="flex:2 1 220px">
@@ -163,266 +128,199 @@
       </div>
 
       <div class="row" style="padding-top:0">
-        <button id="exportBtn" class="ghost-btn">Export my activities</button>
+        <button id="exportBtn" class="ghost-btn">Export</button>
         <input id="importInput" type="file" accept="application/json" style="display:none" />
         <button id="importBtn" class="ghost-btn">Import</button>
-        <button id="resetBtn" class="danger">Reset to defaults</button>
+        <button id="resetBtn" class="danger">Reset (clear my list)</button>
       </div>
     </section>
 
     <footer>
-      Made for quick breaks. Data saves to your device only (Local Storage).<br/>
-      Tip: Add to your home screen from the browser menu for an app-like feel.
+      Only your activities are used. Saved locally on this device (Local Storage).
     </footer>
   </div>
 
   <script>
-    /***** Data *****/
-    const DEFAULTS = {
-      5: [
-        "Stand up & stretch full body",
-        "Drink a glass of water",
-        "Box-breathe (4-4-4-4)",
-        "Tidy your desk surface",
-        "Do 20 calf raises",
-        "Doodle something silly",
-        "Look outside, name 5 things you see",
-        "Send a thank-you message to someone",
-        "5-minute guided breathing (eyes closed)",
-        "Walk to another room and back"
-      ],
-      10: [
-        "Walk around the block",
-        "Make tea or coffee mindfully",
-        "Do a quick posture routine",
-        "Read 3 pages of a book",
-        "Stretch hips + hamstrings",
-        "Clean out 10 emails",
-        "Journal: 3 things you're grateful for",
-        "Declutter 10 items",
-        "Learn a new word",
-        "Put on a favorite song & vibe"
-      ],
-      15: [
-        "Bodyweight circuit: squats/pushups/plank",
-        "Guided meditation (15 min)",
-        "Prep a healthy snack",
-        "Call a friend or family member",
-        "Sketch an idea",
-        "Water your plants",
-        "Micro-plan the rest of your day",
-        "Do a language lesson",
-        "Wipe screens & keyboard",
-        "Sunshine stroll if possible"
-      ],
-      20: [
-        "Do a full mobility flow",
-        "Prep tomorrow’s to-do list",
-        "Tackle a nagging task",
-        "Watch an educational short video",
-        "Deep clean a small area",
-        "Practice a hobby for 20 minutes",
-        "Batch reply to messages",
-        "Cook a quick recipe",
-        "Breathwork + light stretch",
-        "Organize your downloads folder"
-      ],
-      30: [
-        "Workout: intervals or yoga",
-        "Cook and plate a nice meal",
-        "Read a chapter",
-        "Learn a new skill on YouTube",
-        "Declutter a drawer",
-        "Long walk outside",
-        "Creative session: writing/art/music",
-        "Prep meals for tomorrow",
-        "Video call with a friend",
-        "Deep tidy your workspace"
-      ]
-    };
+    /* ===== Only-user-data version ===== */
+    const EMPTY = {5:[],10:[],15:[],20:[],30:[]}; // no defaults
 
-    const timeBuckets = [5, 10, 15, 20, 30];
-
-    const $ = (sel, el=document) => el.querySelector(sel);
-    const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
+    const $ = (s,el=document)=>el.querySelector(s);
+    const $$ = (s,el=document)=>Array.from(el.querySelectorAll(s));
 
     function loadData(){
-      const raw = localStorage.getItem("breakSlotsData");
-      if(!raw) return structuredClone(DEFAULTS);
-      try {
+      const raw = localStorage.getItem("breakSlotsData_userOnly");
+      if(!raw){
+        return structuredClone(EMPTY);
+      }
+      try{
         const parsed = JSON.parse(raw);
-        const merged = structuredClone(DEFAULTS);
-        for (const k of Object.keys(parsed)){
-          const key = String(k);
-          merged[key] = Array.from(new Set([...(merged[key] || []), ...parsed[key]]));
-        }
-        return merged;
-      } catch(e){
-        console.warn("Failed to parse data, resetting.", e);
-        return structuredClone(DEFAULTS);
+        // ensure all buckets exist
+        return {
+          5: Array.isArray(parsed["5"])? parsed["5"] : [],
+          10: Array.isArray(parsed["10"])? parsed["10"] : [],
+          15: Array.isArray(parsed["15"])? parsed["15"] : [],
+          20: Array.isArray(parsed["20"])? parsed["20"] : [],
+          30: Array.isArray(parsed["30"])? parsed["30"] : []
+        };
+      }catch(e){
+        console.warn("Bad stored data, resetting.", e);
+        return structuredClone(EMPTY);
       }
     }
-    function saveData(data){ localStorage.setItem("breakSlotsData", JSON.stringify(data)); }
+    function saveData(d){
+      localStorage.setItem("breakSlotsData_userOnly", JSON.stringify(d));
+    }
 
     let DATA = loadData();
+    const timeBuckets = [5,10,15,20,30];
     let selectedTime = 10;
-    let timerId = null;
-    let endsAt = null;
+    let timerId=null, endsAt=null;
 
-    /***** UI Init *****/
     function makeChips(){
       const row = $("#timeChips");
-      row.innerHTML = "";
-      timeBuckets.forEach(min => {
-        const btn = document.createElement("button");
-        btn.className = "chip";
-        btn.type = "button";
-        btn.setAttribute("aria-pressed", String(min === selectedTime));
-        btn.textContent = (min === 30) ? "30+ min" : `${min} min`;
-        btn.addEventListener("click", () => {
-          selectedTime = min;
-          $$(".chip", row).forEach(c => c.setAttribute("aria-pressed","false"));
-          btn.setAttribute("aria-pressed","true");
+      row.innerHTML="";
+      timeBuckets.forEach(min=>{
+        const b=document.createElement("button");
+        b.className="chip"; b.type="button";
+        b.textContent = (min===30) ? "30+ min" : `${min} min`;
+        b.setAttribute("aria-pressed", String(min===selectedTime));
+        b.addEventListener("click", ()=>{
+          selectedTime=min;
+          $$(".chip",row).forEach(c=>c.setAttribute("aria-pressed","false"));
+          b.setAttribute("aria-pressed","true");
           updateSelectedTime();
-          spin(); // auto spin one activity
+          spin();
         });
-        row.appendChild(btn);
+        row.appendChild(b);
       });
       updateSelectedTime();
     }
-
     function updateSelectedTime(){
-      $("#selectedTime").textContent = (selectedTime === 30) ? "30+ minutes" : `${selectedTime} minutes`;
+      $("#selectedTime").textContent = (selectedTime===30) ? "30+ minutes" : `${selectedTime} minutes`;
     }
 
-    function rand(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+    const rand = arr => arr[Math.floor(Math.random()*arr.length)];
 
     function pickFromBucket(min){
       const pool = DATA[String(min)] || [];
-      if (pool.length === 0) return "Add activities for this time →";
-      return rand(pool);
+      return pool.length ? rand(pool) : "No activities yet for this time. Add one below ↓";
     }
 
     function animateSlot(el, finalText){
-      let i = 0;
-      const spinTime = 600 + Math.random() * 400;
-      const start = performance.now();
-      const tick = (now) => {
+      const pool = DATA[String(selectedTime)] || [];
+      if(!pool.length){ el.textContent = finalText; return; } // no animation if no items yet
+      let i=0, start=performance.now(), spinTime=600+Math.random()*400;
+      const tick = now=>{
         const t = now - start;
-        if (t < spinTime){
-          el.style.transform = (i % 2 === 0) ? "translateY(2px)" : "translateY(0)";
-          el.textContent = rand(DATA[String(selectedTime)]) || finalText;
+        if(t < spinTime){
+          el.style.transform = (i%2===0) ? "translateY(2px)" : "translateY(0)";
+          el.textContent = rand(pool);
           i++; requestAnimationFrame(tick);
         } else {
-          el.style.transform = "translateY(0)";
-          el.textContent = finalText;
+          el.style.transform = "translateY(0)"; el.textContent = finalText;
         }
       };
       requestAnimationFrame(tick);
     }
 
     function spin(){
-      const valueEl = $("#slot0");
+      const el = $("#slot0");
       const text = pickFromBucket(selectedTime);
-      animateSlot(valueEl, text);
+      animateSlot(el, text);
     }
 
     // Timer
     function startTimer(){
       clearTimer();
-      const minutes = selectedTime === 30 ? 30 : selectedTime;
-      endsAt = Date.now() + minutes * 60 * 1000;
+      const minutes = selectedTime===30 ? 30 : selectedTime;
+      endsAt = Date.now() + minutes*60*1000;
       tickTimer();
       timerId = setInterval(tickTimer, 500);
-      if ("vibrate" in navigator) try { navigator.vibrate(30); } catch {}
+      if("vibrate" in navigator) try{navigator.vibrate(30)}catch{}
     }
     function tickTimer(){
       const left = Math.max(0, endsAt - Date.now());
-      const mm = String(Math.floor(left / 60000)).padStart(2,"0");
-      const ss = String(Math.floor((left % 60000)/1000)).padStart(2,"0");
+      const mm = String(Math.floor(left/60000)).padStart(2,"0");
+      const ss = String(Math.floor((left%60000)/1000)).padStart(2,"0");
       $("#countdown").textContent = `${mm}:${ss}`;
-      if (left <= 0){
+      if(left<=0){
         clearTimer();
-        document.title = "⏱️ Break done!";
-        if ("vibrate" in navigator) try { navigator.vibrate([80, 60, 80]); } catch {}
+        document.title="⏱️ Break done!";
+        if("vibrate" in navigator) try{navigator.vibrate([80,60,80])}catch{}
         alert("Time's up! Nice break ✨");
       }
     }
     function clearTimer(){
-      if (timerId) clearInterval(timerId);
-      timerId = null; endsAt = null;
-      $("#countdown").textContent = "00:00";
-      document.title = "Break Slots — What to do on my break";
+      if(timerId) clearInterval(timerId);
+      timerId=null; endsAt=null;
+      $("#countdown").textContent="00:00";
+      document.title="Break Slots — One Pick";
     }
 
-    // Export / Import / Reset
-    function exportData(){
-      const blob = new Blob([JSON.stringify(DATA, null, 2)], {type:"application/json"});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url; a.download = "break-slots-activities.json"; a.click();
-      setTimeout(()=>URL.revokeObjectURL(url), 3000);
-    }
-    function importData(file){
-      const reader = new FileReader();
-      reader.onload = () => {
-        try {
-          const parsed = JSON.parse(reader.result);
-          for (const k of Object.keys(parsed)){
-            const key = String(k);
-            const arr = Array.isArray(parsed[key]) ? parsed[key] : [];
-            DATA[key] = Array.from(new Set([...(DATA[key] || []), ...arr]));
-          }
-          saveData(DATA);
-          spin();
-          alert("Imported activities successfully ✅");
-        } catch(e){
-          alert("Could not import that file. Make sure it's a JSON export created by this app.");
-        }
-      };
-      reader.readAsText(file);
-    }
-    function resetData(){
-      if (!confirm("Reset to default activities? This keeps your timer and settings but removes your custom items.")) return;
-      DATA = structuredClone(DEFAULTS);
-      saveData(DATA);
-      spin();
-    }
-
+    // Add / Export / Import / Reset
     function addItem(){
       const text = $("#newItem").value.trim();
-      const mins = parseInt($("#newMinutes").value, 10);
-      if (!text) { $("#newItem").focus(); return; }
-      const key = String(mins);
-      DATA[key] = Array.from(new Set([...(DATA[key] || []), text]));
+      const mins = parseInt($("#newMinutes").value,10);
+      if(!text){ $("#newItem").focus(); return; }
+      const k = String(mins);
+      const set = new Set([...(DATA[k]||[]) , text]);
+      DATA[k] = Array.from(set);
       saveData(DATA);
-      $("#newItem").value = "";
+      $("#newItem").value="";
       selectedTime = mins;
-      $$(".chip").forEach(c => c.setAttribute("aria-pressed", "false"));
-      // set the matching chip active
-      $$(".chip").find(c => c.textContent.includes(mins === 30 ? "30+" : String(mins)))?.setAttribute("aria-pressed","true");
+      $$(".chip").forEach(c=>c.setAttribute("aria-pressed","false"));
+      $$(".chip").find(c=>c.textContent.includes(mins===30?"30+":String(mins)))?.setAttribute("aria-pressed","true");
       updateSelectedTime();
       spin();
     }
 
-    // Hook up events
+    function exportData(){
+      const blob = new Blob([JSON.stringify(DATA,null,2)], {type:"application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href=url; a.download="my-break-activities.json"; a.click();
+      setTimeout(()=>URL.revokeObjectURL(url), 2000);
+    }
+    function importData(file){
+      const r = new FileReader();
+      r.onload = ()=>{
+        try{
+          const parsed = JSON.parse(r.result);
+          // Only accept the same bucket keys
+          ["5","10","15","20","30"].forEach(k=>{
+            const arr = Array.isArray(parsed[k]) ? parsed[k] : [];
+            DATA[k] = Array.from(new Set([...(DATA[k]||[]), ...arr]));
+          });
+          saveData(DATA);
+          spin();
+          alert("Imported ✅");
+        }catch(e){ alert("Invalid JSON file."); }
+      };
+      r.readAsText(file);
+    }
+    function resetData(){
+      if(!confirm("Clear ALL my activities?")) return;
+      DATA = structuredClone(EMPTY);
+      saveData(DATA);
+      $("#slot0").textContent = "Add an activity below ↓";
+    }
+
+    // Events
     $("#spin").addEventListener("click", spin);
     $("#spinSecondary").addEventListener("click", spin);
     $("#startTimer").addEventListener("click", startTimer);
     $("#clearTimer").addEventListener("click", clearTimer);
     $("#addItem").addEventListener("click", addItem);
     $("#exportBtn").addEventListener("click", exportData);
-    $("#importBtn").addEventListener("click", () => $("#importInput").click());
-    $("#importInput").addEventListener("change", (e) => {
-      const file = e.target.files && e.target.files[0];
-      if (file) importData(file);
-      e.target.value = "";
+    $("#importBtn").addEventListener("click", ()=>$("#importInput").click());
+    $("#importInput").addEventListener("change", e=>{
+      const f = e.target.files?.[0]; if(f) importData(f); e.target.value="";
     });
     $("#resetBtn").addEventListener("click", resetData);
 
     // Init
     makeChips();
-    spin();
+    spin(); // show something (or prompt) on load
   </script>
 </body>
 </html>
