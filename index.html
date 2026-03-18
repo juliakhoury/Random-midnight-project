@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suitcase Packing Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EDEAE4;
+    --card: #FFFFFF;
+    --accent: #2D6A4F;
+    --accent-light: #D8F3DC;
+    --text: #1B1B18;
+    --text-muted: #7C7A72;
+    --border: #D6D2C9;
+    --done-bg: #E8F5E2;
+    --done-accent: #2D6A4F;
+    --shadow: 0 2px 14px rgba(27,27,24,0.05);
+    --shadow-hover: 0 6px 24px rgba(27,27,24,0.1);
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+font-family: ‘Karla’, sans-serif;
+background: var(–bg);
+color: var(–text);
+min-height: 100vh;
+padding-bottom: 80px;
+}
+
+.hero {
+position: relative;
+padding: 56px 24px 44px;
+text-align: center;
+overflow: hidden;
+background: linear-gradient(155deg, #1B3A2D 0%, #2D6A4F 60%, #3E8E6E 100%);
+color: white;
+}
+
+.hero::before {
+content: ‘’;
+position: absolute;
+top: -80px; right: -60px;
+width: 360px; height: 360px;
+background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+border-radius: 50%;
+}
+
+.hero::after {
+content: ‘’;
+position: absolute;
+bottom: -100px; left: -40px;
+width: 300px; height: 300px;
+background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+border-radius: 50%;
+}
+
+.hero-icon {
+font-size: 52px;
+margin-bottom: 10px;
+display: inline-block;
+animation: sway 4s ease-in-out infinite;
+}
+
+@keyframes sway {
+0%, 100% { transform: rotate(-3deg) translateY(0); }
+50% { transform: rotate(3deg) translateY(-6px); }
+}
+
+.hero h1 {
+font-family: ‘DM Serif Display’, serif;
+font-size: clamp(1.8rem, 5vw, 2.8rem);
+font-weight: 400;
+letter-spacing: -0.5px;
+margin-bottom: 6px;
+position: relative;
+}
+
+.hero p {
+font-size: 14px;
+opacity: 0.6;
+font-weight: 300;
+letter-spacing: 0.3px;
+}
+
+.hero .tag {
+display: inline-block;
+margin-top: 14px;
+padding: 5px 16px;
+background: rgba(255,255,255,0.12);
+border: 1px solid rgba(255,255,255,0.18);
+border-radius: 20px;
+font-size: 12px;
+font-weight: 600;
+letter-spacing: 0.8px;
+text-transform: uppercase;
+}
+
+/* Sticky bar */
+.sticky-bar {
+position: sticky;
+top: 0;
+z-index: 100;
+background: var(–card);
+border-bottom: 1px solid var(–border);
+padding: 12px 24px;
+box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.bar-top {
+display: flex;
+justify-content: space-between;
+align-items: center;
+max-width: 720px;
+margin: 0 auto 8px;
+}
+
+.bar-label {
+font-size: 12px;
+font-weight: 700;
+color: var(–text-muted);
+text-transform: uppercase;
+letter-spacing: 1.2px;
+}
+
+.bar-count {
+font-family: ‘DM Serif Display’, serif;
+font-size: 17px;
+color: var(–accent);
+}
+
+.track {
+max-width: 720px;
+margin: 0 auto 12px;
+height: 5px;
+background: var(–border);
+border-radius: 3px;
+overflow: hidden;
+}
+
+.track-fill {
+height: 100%;
+background: linear-gradient(90deg, var(–accent), #52B788);
+border-radius: 3px;
+transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+width: 0%;
+}
+
+.tabs {
+display: flex;
+gap: 6px;
+max-width: 720px;
+margin: 0 auto;
+overflow-x: auto;
+scrollbar-width: none;
+padding-bottom: 2px;
+}
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+padding: 5px 13px;
+border-radius: 18px;
+border: 1.5px solid var(–border);
+background: transparent;
+font-family: ‘Karla’, sans-serif;
+font-size: 12.5px;
+font-weight: 600;
+color: var(–text-muted);
+cursor: pointer;
+white-space: nowrap;
+transition: all 0.2s;
+}
+.tab:hover { border-color: var(–accent); color: var(–accent); }
+.tab.active { background: var(–text); border-color: var(–text); color: white; }
+
+/* Main */
+.container {
+max-width: 720px;
+margin: 0 auto;
+padding: 24px 16px;
+}
+
+.category {
+margin-bottom: 26px;
+animation: fadeUp 0.4s ease-out both;
+}
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(12px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.cat-head {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 10px;
+cursor: pointer;
+user-select: none;
+padding: 0 4px;
+}
+
+.cat-emoji { font-size: 21px; flex-shrink: 0; }
+
+.cat-title {
+font-family: ‘DM Serif Display’, serif;
+font-size: 19px;
+flex-grow: 1;
+}
+
+.cat-badge {
+font-size: 11px;
+font-weight: 700;
+color: var(–text-muted);
+background: var(–border);
+padding: 2px 10px;
+border-radius: 12px;
+letter-spacing: 0.3px;
+}
+
+.cat-arrow {
+font-size: 16px;
+color: var(–text-muted);
+transition: transform 0.3s ease;
+}
+.cat-arrow.shut { transform: rotate(-90deg); }
+
+.list {
+display: flex;
+flex-direction: column;
+gap: 5px;
+overflow: hidden;
+transition: max-height 0.4s ease, opacity 0.3s;
+}
+.list.shut { max-height: 0 !important; opacity: 0; pointer-events: none; }
+
+.item {
+display: flex;
+align-items: flex-start;
+gap: 12px;
+padding: 13px 15px;
+background: var(–card);
+border-radius: 11px;
+box-shadow: var(–shadow);
+transition: all 0.25s ease;
+cursor: pointer;
+border: 1.5px solid transparent;
+}
+.item:hover { box-shadow: var(–shadow-hover); transform: translateY(-1px); }
+
+.item.done {
+background: var(–done-bg);
+border-color: rgba(45,106,79,0.15);
+}
+.item.done .itxt { text-decoration: line-through; color: var(–text-muted); }
+
+.chk {
+flex-shrink: 0;
+width: 21px; height: 21px;
+border-radius: 6px;
+border: 2px solid var(–border);
+display: flex;
+align-items: center;
+justify-content: center;
+margin-top: 1px;
+transition: all 0.25s ease;
+background: white;
+}
+.item.done .chk { background: var(–done-accent); border-color: var(–done-accent); }
+
+.chk svg {
+width: 12px; height: 12px;
+stroke: white; stroke-width: 3; fill: none;
+opacity: 0; transform: scale(0.5);
+transition: all 0.2s ease;
+}
+.item.done .chk svg { opacity: 1; transform: scale(1); }
+
+.icontent { flex-grow: 1; }
+
+.itxt {
+font-size: 14.5px;
+font-weight: 500;
+line-height: 1.4;
+transition: all 0.25s ease;
+}
+
+.isub {
+font-size: 12px;
+color: var(–text-muted);
+margin-top: 2px;
+font-weight: 300;
+}
+
+.iqty {
+flex-shrink: 0;
+font-size: 11px;
+font-weight: 700;
+color: var(–accent);
+background: var(–accent-light);
+padding: 2px 8px;
+border-radius: 8px;
+margin-top: 2px;
+letter-spacing: 0.3px;
+}
+
+/* Add row */
+.add-row {
+display: flex;
+gap: 8px;
+margin-top: 8px;
+}
+.add-row input {
+flex: 1;
+padding: 9px 13px;
+border: 1.5px solid var(–border);
+border-radius: 9px;
+font-family: ‘Karla’, sans-serif;
+font-size: 13px;
+background: var(–card);
+color: var(–text);
+outline: none;
+transition: border-color 0.2s;
+}
+.add-row input:focus { border-color: var(–accent); }
+.add-row input::placeholder { color: var(–text-muted); }
+.add-row button {
+padding: 9px 15px;
+background: var(–accent);
+color: white;
+border: none;
+border-radius: 9px;
+font-size: 18px;
+line-height: 1;
+cursor: pointer;
+transition: background 0.2s;
+}
+.add-row button:hover { background: #245840; }
+
+/* Celebration */
+.cele { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(27,27,24,0.65); backdrop-filter: blur(6px); align-items: center; justify-content: center; }
+.cele.show { display: flex; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+
+.cele-card {
+background: white; border-radius: 22px; padding: 44px 36px; text-align: center;
+box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
+max-width: 340px; margin: 16px;
+}
+@keyframes popIn { from { opacity:0; transform: scale(0.8) translateY(20px) } to { opacity:1; transform: scale(1) translateY(0) } }
+
+.cele-card .emoji { font-size: 60px; margin-bottom: 14px; }
+.cele-card h2 { font-family: ‘DM Serif Display’, serif; font-size: 26px; margin-bottom: 6px; }
+.cele-card p { color: var(–text-muted); font-size: 14px; line-height: 1.5; }
+.cele-card button {
+margin-top: 22px; padding: 11px 30px;
+background: var(–accent); color: white; border: none; border-radius: 10px;
+font-family: ‘Karla’, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.cele-card button:hover { background: #245840; }
+
+.bottom-actions {
+display: flex; gap: 10px; justify-content: center; margin-top: 30px;
+}
+
+.abtn {
+padding: 9px 22px;
+background: transparent; color: var(–text-muted);
+border: 1.5px solid var(–border); border-radius: 9px;
+font-family: ‘Karla’, sans-serif; font-size: 12px; font-weight: 700;
+cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s;
+}
+.abtn:hover { border-color: var(–accent); color: var(–accent); }
+.abtn.danger:hover { border-color: #c0392b; color: #c0392b; }
+
+@media (max-width: 480px) {
+.hero { padding: 40px 18px 34px; }
+.container { padding: 18px 12px; }
+.item { padding: 11px 13px; }
+.tab { padding: 4px 10px; font-size: 11.5px; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-icon">🧳</div>
+  <h1>Packing Checklist</h1>
+  <p>International move · Four-season climate</p>
+  <div class="tag">✈️ &nbsp;Don't forget your passport</div>
+</div>
+
+<div class="sticky-bar">
+  <div class="bar-top">
+    <span class="bar-label">Packed</span>
+    <span class="bar-count" id="cnt">0 / 0</span>
+  </div>
+  <div class="track"><div class="track-fill" id="fill"></div></div>
+  <div class="tabs" id="tabs"></div>
+</div>
+
+<div class="container" id="app"></div>
+
+<div class="cele" id="cele">
+  <div class="cele-card">
+    <div class="emoji">✈️</div>
+    <h2>All Packed!</h2>
+    <p>Suitcases are ready. Time for the adventure to begin!</p>
+    <button onclick="document.getElementById('cele').classList.remove('show')">Close</button>
+  </div>
+</div>
+
+<script>
+const DATA = [
+  {
+    title: "Travel Documents",
+    emoji: "🛂",
+    items: [
+      { text: "Passport", sub: "Check expiry — must be valid 6+ months" },
+      { text: "Visa / work permit documents" },
+      { text: "Flight tickets / boarding passes" },
+      { text: "Travel insurance paperwork" },
+      { text: "Copies of ID & important docs", sub: "Digital + printed backup" },
+      { text: "Foreign currency & travel card" },
+      { text: "Vaccination records", sub: "Check destination requirements" },
+      { text: "Embassy contact info", sub: "Save in your phone too" },
+      { text: "Lease or housing confirmation" },
+    ]
+  },
+  {
+    title: "Everyday Clothing",
+    emoji: "👕",
+    items: [
+      { text: "T-shirts & casual tops", qty: "5–7" },
+      { text: "Jeans / pants", qty: "3–4" },
+      { text: "Shorts", qty: "2–3" },
+      { text: "Sweaters / hoodies", qty: "2–3" },
+      { text: "Light jacket / windbreaker" },
+      { text: "Warm winter coat" },
+      { text: "Underwear", qty: "10+" },
+      { text: "Socks", qty: "10+ pairs" },
+      { text: "Pajamas", qty: "2 sets" },
+      { text: "Comfortable walking shoes" },
+      { text: "Sandals / flip-flops" },
+      { text: "Warm boots or waterproof shoes" },
+      { text: "Belt" },
+      { text: "Hat / beanie" },
+      { text: "Scarf & gloves" },
+      { text: "Rain jacket or umbrella" },
+    ]
+  },
+  {
+    title: "Work & Office Wear",
+    emoji: "👔",
+    items: [
+      { text: "Dress shirts / blouses", qty: "3–4" },
+      { text: "Dress pants / trousers", qty: "2–3" },
+      { text: "Blazer or sport coat" },
+      { text: "Dress shoes" },
+      { text: "Ties / scarves / accessories" },
+      { text: "Dress socks", qty: "4–5 pairs" },
+      { text: "Professional bag or briefcase" },
+      { text: "Garment bag for transit", sub: "Keeps formal wear wrinkle-free" },
+    ]
+  },
+  {
+    title: "Gym & Fitness",
+    emoji: "💪",
+    items: [
+      { text: "Workout tops", qty: "3–4" },
+      { text: "Workout shorts / leggings", qty: "2–3" },
+      { text: "Athletic shoes / trainers" },
+      { text: "Sports bra / base layer" },
+      { text: "Gym bag or drawstring backpack" },
+      { text: "Sweat towel" },
+    ]
+  },
+  {
+    title: "Toiletries & Health",
+    emoji: "🧴",
+    items: [
+      { text: "Toothbrush & toothpaste" },
+      { text: "shampoo soap" },
+      { text: "Deodorant" },
+      { text: "Razor" },
+      { text: "Skincare basics"},
+      { text: "Hairbrush / comb" },
+      { text: "Nail clippers & tweezers" },
+      { text: "Plus spare glasses" },
+      { text: "Prescription medications" },
+      { text: "Pain relievers & cold medicine" },
+      { text: "First aid kit basics", sub: "Band-aids, antiseptic, allergy meds" },
+      { text: "Toiletry bag", sub: "pads"},
+    ]
+  },
+  {
+    title: "Tech & Gadgets",
+    emoji: "💻",
+    items: [
+      { text: "Laptop & charger" },
+      { text: "Phone & charger" },
+      { text: "Universal power adapter", sub: "Check plug type for your destination" },
+      { text: "Voltage converter", sub: "If needed for your devices" },
+      { text: "Headphones / earbuds" },
+      { text: "Portable battery / power bank" },
+      { text: "USB cables & adapters" },
+      { text: "External hard drive or USB stick", sub: "Backup important files before leaving" },
+      { text: "Camera & memory cards" },
+      { text: "Smartwatch & charger" },
+      { text: "Travel-size power strip", sub: "Super handy in hotels & airports" },
+    ]
+  },
+  {
+    title: "Comfort & In-Flight",
+    emoji: "✈️",
+    items: [
+      { text: "Neck pillow" },
+      { text: "Eye mask & ear plugs" },
+      { text: "Refillable water bottle", sub: "Fill after security" },
+      { text: "Snacks for the flight" },
+      { text: "Book or entertainment" },
+      { text: "Pen for customs forms" },
+      { text: "Compression socks", sub: "Great for long-haul flights" },
+      { text: "Change of clothes in carry-on", sub: "In case luggage is delayed" },
+    ]
+  },
+  {
+    title: "Miscellaneous",
+    emoji: "📦",
+    items: [
+      { text: "Packing cubes / organizers" },
+      { text: "Ziplock bags", sub: "For liquids, small items, or laundry" },
+      { text: "Luggage tags with contact info" },
+      { text: "Luggage locks (TSA-approved)" },
+      { text: "Laundry bag" },
+      { text: "Sewing kit", sub: "Tiny emergency kit" },
+      { text: "Photos or sentimental items", sub: "A little piece of home" },
+      { text: "Gifts for new hosts / colleagues", sub: "Something from your home country" },
+      { text: "Small day backpack" },
+    ]
+  }
+];
+
+const KEY = 'packingSuitcase_v1';
+
+function load() {
+  try { return JSON.parse(localStorage.getItem(KEY)) || { ck:{}, col:{}, cust:{}, flt:'all' }; }
+  catch { return { ck:{}, col:{}, cust:{}, flt:'all' }; }
+}
+function save(s) { localStorage.setItem(KEY, JSON.stringify(s)); }
+function iid(c,i) { return `${c}.${i}`; }
+function xid(c,i) { return `${c}.x${i}`; }
+
+function allItems(s) {
+  let o = [];
+  DATA.forEach((cat,ci) => {
+    cat.items.forEach((_,ii) => o.push(iid(ci,ii)));
+    (s.cust[ci]||[]).forEach((_,xi) => o.push(xid(ci,xi)));
+  });
+  return o;
+}
+
+function renderTabs(s) {
+  const el = document.getElementById('tabs');
+  const list = [{k:'all',l:'✦ All'}, ...DATA.map((c,i) => ({k:c.title, l:`${c.emoji} ${c.title}`}))];
+  el.innerHTML = list.map(t =>
+    `<button class="tab ${s.flt===t.k?'active':''}" data-f="${t.k}">${t.l}</button>`
+  ).join('');
+  el.querySelectorAll('.tab').forEach(b => b.onclick = () => {
+    const st = load(); st.flt = b.dataset.f; save(st); render();
+  });
+}
+
+function render() {
+  const s = load();
+  const app = document.getElementById('app');
+  const all = allItems(s);
+  const total = all.length;
+  const done = all.filter(id => s.ck[id]).length;
+
+  renderTabs(s);
+  app.innerHTML = '';
+  let vi = 0;
+
+  DATA.forEach((cat, ci) => {
+    if (s.flt !== 'all' && s.flt !== cat.title) return;
+    vi++;
+    const customs = s.cust[ci] || [];
+    const items = [
+      ...cat.items.map((it,ii) => ({...it, id: iid(ci,ii)})),
+      ...customs.map((t,xi) => ({text:t, id: xid(ci,xi), isX:true}))
+    ];
+    const catDone = items.filter(i => s.ck[i.id]).length;
+    const shut = s.col[ci] || false;
+
+    const d = document.createElement('div');
+    d.className = 'category';
+    d.style.animationDelay = `${vi*0.04}s`;
+
+    d.innerHTML = `
+      <div class="cat-head" data-c="${ci}">
+        <span class="cat-emoji">${cat.emoji}</span>
+        <span class="cat-title">${cat.title}</span>
+        <span class="cat-badge">${catDone}/${items.length}</span>
+        <span class="cat-arrow ${shut?'shut':''}">▾</span>
+      </div>
+      <div class="list ${shut?'shut':''}">
+        ${items.map(it => `
+          <div class="item ${s.ck[it.id]?'done':''}" data-id="${it.id}">
+            <div class="chk"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4"/></svg></div>
+            <div class="icontent">
+              <div class="itxt">${it.text}</div>
+              ${it.sub?`<div class="isub">${it.sub}</div>`:''}
+            </div>
+            ${it.qty?`<span class="iqty">${it.qty}</span>`:''}
+          </div>`).join('')}
+        <div class="add-row">
+          <input type="text" placeholder="Add custom item…" data-c="${ci}"/>
+          <button data-c="${ci}">+</button>
+        </div>
+      </div>`;
+
+    app.appendChild(d);
+  });
+
+  // Bottom
+  const b = document.createElement('div');
+  b.className = 'bottom-actions';
+  b.innerHTML = `<button class="abtn" id="ua">Uncheck All</button><button class="abtn danger" id="ra">Reset Everything</button>`;
+  app.appendChild(b);
+
+  // Progress
+  const pct = total ? Math.round((done/total)*100) : 0;
+  document.getElementById('cnt').textContent = `${done} / ${total}`;
+  document.getElementById('fill').style.width = pct+'%';
+  if (done === total && total > 0) setTimeout(() => document.getElementById('cele').classList.add('show'), 600);
+
+  // Events
+  document.querySelectorAll('.item').forEach(el => el.onclick = () => {
+    const st = load(); st.ck[el.dataset.id] = !st.ck[el.dataset.id]; save(st); render();
+  });
+
+  document.querySelectorAll('.cat-head').forEach(el => el.onclick = () => {
+    const st = load(); const c = el.dataset.c; st.col[c] = !st.col[c]; save(st); render();
+  });
+
+  document.querySelectorAll('.add-row button').forEach(btn => btn.onclick = () => {
+    const ci = parseInt(btn.dataset.c);
+    const inp = btn.parentElement.querySelector('input');
+    const v = inp.value.trim();
+    if (!v) return;
+    const st = load(); if (!st.cust[ci]) st.cust[ci] = []; st.cust[ci].push(v); save(st); render();
+  });
+
+  document.querySelectorAll('.add-row input').forEach(inp => inp.onkeydown = e => {
+    if (e.key === 'Enter') inp.parentElement.querySelector('button').click();
+  });
+
+  document.getElementById('ua').onclick = () => {
+    if (confirm('Uncheck all items?')) { const st = load(); st.ck = {}; save(st); render(); }
+  };
+  document.getElementById('ra').onclick = () => {
+    if (confirm('Reset everything including custom items?')) { localStorage.removeItem(KEY); render(); }
+  };
+}
+
+render();
+</script>
+
+</body>
+</html>
