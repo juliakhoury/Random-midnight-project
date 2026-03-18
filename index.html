@@ -22,69 +22,61 @@
     .pbar { flex: 1; height: 8px; background: #ddd5cb; border-radius: 4px; overflow: hidden; }
     .pfill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
     .pcnt { font-size: 13px; font-weight: 700; min-width: 80px; text-align: right; }
-
-```
-.cat { margin-bottom: 28px; }
-.cat-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; border-bottom: 1px solid #ccc3b8; padding-bottom: 4px; }
-.cat-top h2 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
-.cat-top h2.alldone { color: #5a8a5e; text-decoration: line-through; }
-.cat-top span { font-size: 11px; color: #8a7e74; }
-
-.row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px dotted #ddd5cb; }
-.cb {
-  width: 22px; height: 22px; border-radius: 4px; border: 2px solid #b5aa9e;
-  background: transparent; color: #fff; cursor: pointer; display: flex;
-  align-items: center; justify-content: center; flex-shrink: 0;
-}
-.cb.on { border-color: #5a8a5e; background: #5a8a5e; }
-.cb svg { visibility: hidden; }
-.cb.on svg { visibility: visible; }
-.lbl { flex: 1; font-size: 14px; }
-.lbl.on { color: #8a7e74; text-decoration: line-through; }
-.rm { background: none; border: none; color: #c4b8ac; cursor: pointer; padding: 4px; display: flex; align-items: center; }
-.rm:hover { color: #c47a4a; }
-
-.addbtn {
-  display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 4px 0;
-  background: none; border: none; color: #b5aa9e; font-size: 12px;
-  font-family: inherit; cursor: pointer; letter-spacing: 0.5px;
-}
-.addbtn:hover { color: #c47a4a; }
-
-.irow { display: flex; gap: 8px; margin-top: 8px; }
-.irow input {
-  flex: 1; padding: 6px 10px; font-size: 13px; font-family: inherit;
-  border: 1.5px solid #c4b8ac; border-radius: 4px; background: #faf7f4; outline: none;
-}
-.irow input:focus { border-color: #c47a4a; }
-.go {
-  padding: 6px 14px; font-size: 12px; font-weight: 700; font-family: inherit;
-  background: #2a2420; color: #f5f0eb; border: none; border-radius: 4px;
-  cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
-}
-.xx {
-  padding: 6px 10px; font-size: 12px; font-family: inherit; background: none;
-  border: 1.5px solid #c4b8ac; border-radius: 4px; cursor: pointer; color: #8a7e74;
-}
-
-.nc { margin-top: 16px; padding-top: 16px; border-top: 2px solid #2a2420; }
-.ncbtn {
-  display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; background: none;
-  border: none; color: #8a7e74; font-size: 13px; font-family: inherit;
-  cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-}
-.ncbtn:hover { color: #c47a4a; }
-.ncrow { display: flex; gap: 8px; }
-.ncrow input {
-  flex: 1; padding: 8px 10px; font-size: 13px; font-family: inherit;
-  border: 1.5px solid #c4b8ac; border-radius: 4px; background: #faf7f4; outline: none;
-}
-.ncrow input:focus { border-color: #c47a4a; }
-.ncrow .go { padding: 8px 16px; }
-.ncrow .xx { padding: 8px 10px; }
-.tip { margin-top: 32px; font-size: 11px; color: #b5aa9e; text-align: center; letter-spacing: 0.5px; }
-```
-
+    .cat { margin-bottom: 28px; }
+    .cat-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; border-bottom: 1px solid #ccc3b8; padding-bottom: 4px; }
+    .cat-top h2 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+    .cat-top h2.alldone { color: #5a8a5e; text-decoration: line-through; }
+    .cat-top span { font-size: 11px; color: #8a7e74; }
+    .row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px dotted #ddd5cb; }
+    .cb {
+      width: 22px; height: 22px; border-radius: 4px; border: 2px solid #b5aa9e;
+      background: transparent; color: #fff; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .cb.on { border-color: #5a8a5e; background: #5a8a5e; }
+    .cb svg { visibility: hidden; }
+    .cb.on svg { visibility: visible; }
+    .lbl { flex: 1; font-size: 14px; }
+    .lbl.on { color: #8a7e74; text-decoration: line-through; }
+    .rm { background: none; border: none; color: #c4b8ac; cursor: pointer; padding: 4px; display: flex; align-items: center; }
+    .rm:hover { color: #c47a4a; }
+    .addbtn {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 4px 0;
+      background: none; border: none; color: #b5aa9e; font-size: 12px;
+      font-family: inherit; cursor: pointer; letter-spacing: 0.5px;
+    }
+    .addbtn:hover { color: #c47a4a; }
+    .irow { display: flex; gap: 8px; margin-top: 8px; }
+    .irow input {
+      flex: 1; padding: 6px 10px; font-size: 13px; font-family: inherit;
+      border: 1.5px solid #c4b8ac; border-radius: 4px; background: #faf7f4; outline: none;
+    }
+    .irow input:focus { border-color: #c47a4a; }
+    .go {
+      padding: 6px 14px; font-size: 12px; font-weight: 700; font-family: inherit;
+      background: #2a2420; color: #f5f0eb; border: none; border-radius: 4px;
+      cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .xx {
+      padding: 6px 10px; font-size: 12px; font-family: inherit; background: none;
+      border: 1.5px solid #c4b8ac; border-radius: 4px; cursor: pointer; color: #8a7e74;
+    }
+    .nc { margin-top: 16px; padding-top: 16px; border-top: 2px solid #2a2420; }
+    .ncbtn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; background: none;
+      border: none; color: #8a7e74; font-size: 13px; font-family: inherit;
+      cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .ncbtn:hover { color: #c47a4a; }
+    .ncrow { display: flex; gap: 8px; }
+    .ncrow input {
+      flex: 1; padding: 8px 10px; font-size: 13px; font-family: inherit;
+      border: 1.5px solid #c4b8ac; border-radius: 4px; background: #faf7f4; outline: none;
+    }
+    .ncrow input:focus { border-color: #c47a4a; }
+    .ncrow .go { padding: 8px 16px; }
+    .ncrow .xx { padding: 8px 10px; }
+    .tip { margin-top: 32px; font-size: 11px; color: #b5aa9e; text-align: center; letter-spacing: 0.5px; }
   </style>
 </head>
 <body>
@@ -101,233 +93,6 @@
   <div class="nc" id="nc"></div>
   <p class="tip">Tip: wear your bulkiest coat &amp; shoes on the plane</p>
 </div>
-<script>
-var cats = [
-  { name:"Summer Clothing", items:[
-    {n:"Lightweight tops (4\u20135)",c:false},{n:"Shorts (2)",c:false},
-    {n:"Light pants or skirt",c:false},{n:"Sundress / going-out piece",c:false}
-  ]},
-  { name:"Winter Clothing", items:[
-    {n:"Coat or parka",c:false},{n:"Fleece or sweater",c:false},
-    {n:"Long-sleeve shirts (2\u20133)",c:false},{n:"Pants / jeans (2)",c:false},
-    {n:"Thermals or warm leggings",c:false},{n:"Scarf, beanie & gloves",c:false}
-  ]},
-  { name:"Year-Round Essentials", items:[
-    {n:"Underwear (7 days)",c:false},{n:"Socks (7 days)",c:false},{n:"Pajamas",c:false},
-    {n:"Formal / interview outfit",c:false},{n:"Workout clothes",c:false},
-    {n:"Sturdy shoes (wear on plane)",c:false},{n:"Light shoes or sneakers",c:false},
-    {n:"Sandals / flip-flops",c:false}
-  ]},
-  { name:"Toiletries & Health", items:[
-    {n:"Toothbrush & toothpaste",c:false},{n:"Deodorant",c:false},
-    {n:"Shampoo & conditioner",c:false},{n:"Sunscreen",c:false},{n:"Razor",c:false},
-    {n:"Nail clippers",c:false},{n:"Prescriptions & medications",c:false},
-    {n:"First aid basics",c:false},{n:"Quick-dry towel",c:false}
-  ]},
-  { name:"Documents & Money", items:[
-    {n:"Passport",c:false},{n:"Visa paperwork",c:false},{n:"Work contract / offer letter",c:false},
-    {n:"Diplomas & certificates",c:false},{n:"Medical records",c:false},
-    {n:"Digital backups of all docs",c:false},{n:"Credit / debit cards (1\u20132)",c:false},
-    {n:"Small amount of local cash",c:false}
-  ]},
-  { name:"Tech & Electronics", items:[
-    {n:"Phone & charger",c:false},{n:"Power adapter (destination type)",c:false},
-    {n:"Portable battery pack",c:false},{n:"Earbuds / headphones",c:false},
-    {n:"Laptop + charger (if needed)",c:false}
-  ]},
-  { name:"Practical Extras", items:[
-    {n:"Daypack or packable tote",c:false},{n:"Packing cubes",c:false},
-    {n:"Reusable water bottle",c:false},{n:"Travel lock",c:false},
-    {n:"Earplugs & sleep mask",c:false},{n:"Ziplock bags",c:false},{n:"Pen",c:false}
-  ]}
-];
-
-var addingTo = -1;
-var showNC = false;
-
-function el(tag, cls) {
-var e = document.createElement(tag);
-if (cls) e.className = cls;
-return e;
-}
-
-function svg(path, w, sw) {
-var s = document.createElementNS(“http://www.w3.org/2000/svg”,“svg”);
-s.setAttribute(“width”,“14”);
-s.setAttribute(“height”,“14”);
-s.setAttribute(“viewBox”,“0 0 14 14”);
-s.setAttribute(“fill”,“none”);
-var p = document.createElementNS(“http://www.w3.org/2000/svg”,“path”);
-p.setAttribute(“d”, path);
-p.setAttribute(“stroke”,“currentColor”);
-p.setAttribute(“stroke-width”, sw || “2”);
-p.setAttribute(“stroke-linecap”,“round”);
-p.setAttribute(“stroke-linejoin”,“round”);
-s.appendChild(p);
-return s;
-}
-
-function checkSvg() { return svg(“M2.5 7.5L5.5 10.5L11.5 3.5”); }
-function trashSvg() { return svg(“M2 4h10M5 4V2.5a.5.5 0 01.5-.5h3a.5.5 0 01.5.5V4m1.5 0v7.5a1 1 0 01-1 1h-5a1 1 0 01-1-1V4h8z”,“1.2”); }
-function plusSvg() { return svg(“M7 2v10M2 7h10”); }
-
-function progress() {
-var t=0, c=0;
-cats.forEach(function(cat){
-t += cat.items.length;
-cat.items.forEach(function(it){ if(it.c) c++; });
-});
-var pct = t ? Math.round(c/t*100) : 0;
-var f = document.getElementById(“pf”);
-f.style.width = pct+”%”;
-f.style.background = pct===100 ? “#5a8a5e” : “#c47a4a”;
-document.getElementById(“pc”).textContent = c+” / “+t;
-}
-
-function render() {
-var main = document.getElementById(“main”);
-main.innerHTML = “”;
-
-cats.forEach(function(cat, ci) {
-var sec = el(“div”,“cat”);
-var cc = 0;
-cat.items.forEach(function(it){ if(it.c) cc++; });
-var allDone = cat.items.length > 0 && cc === cat.items.length;
-
-```
-// header
-var top = el("div","cat-top");
-var h2 = el("h2");
-h2.textContent = cat.name;
-if (allDone) h2.className = "alldone";
-var cnt = el("span");
-cnt.textContent = cc+"/"+cat.items.length;
-top.appendChild(h2);
-top.appendChild(cnt);
-sec.appendChild(top);
-
-// items
-cat.items.forEach(function(it, idx) {
-  var row = el("div","row");
-
-  var cb = el("button", it.c ? "cb on" : "cb");
-  cb.appendChild(checkSvg());
-  cb.addEventListener("click", function() {
-    it.c = !it.c;
-    render();
-  });
-  row.appendChild(cb);
-
-  var lbl = el("span", it.c ? "lbl on" : "lbl");
-  lbl.textContent = it.n;
-  row.appendChild(lbl);
-
-  var rm = el("button","rm");
-  rm.appendChild(trashSvg());
-  rm.addEventListener("click", function() {
-    cat.items.splice(idx, 1);
-    if (cat.items.length === 0) cats.splice(ci, 1);
-    render();
-  });
-  row.appendChild(rm);
-
-  sec.appendChild(row);
-});
-
-// add item
-if (addingTo === ci) {
-  var irow = el("div","irow");
-  var inp = el("input");
-  inp.placeholder = "New item...";
-  inp.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") doAdd(cat, inp);
-  });
-  irow.appendChild(inp);
-
-  var gobtn = el("button","go");
-  gobtn.textContent = "Add";
-  gobtn.addEventListener("click", function() { doAdd(cat, inp); });
-  irow.appendChild(gobtn);
-
-  var xbtn = el("button","xx");
-  xbtn.textContent = "\u2715";
-  xbtn.addEventListener("click", function() { addingTo = -1; render(); });
-  irow.appendChild(xbtn);
-
-  sec.appendChild(irow);
-  main.appendChild(sec);
-  setTimeout(function(){ inp.focus(); }, 0);
-} else {
-  var ab = el("button","addbtn");
-  ab.appendChild(plusSvg());
-  ab.appendChild(document.createTextNode(" Add item"));
-  ab.addEventListener("click", function() { addingTo = ci; render(); });
-  sec.appendChild(ab);
-  main.appendChild(sec);
-}
-```
-
-});
-
-progress();
-renderNC();
-}
-
-function doAdd(cat, inp) {
-var v = inp.value.trim();
-if (!v) return;
-cat.items.push({n: v, c: false});
-addingTo = -1;
-render();
-}
-
-function renderNC() {
-var nc = document.getElementById(“nc”);
-nc.innerHTML = “”;
-if (showNC) {
-var row = el(“div”,“ncrow”);
-var inp = el(“input”);
-inp.placeholder = “Category name…”;
-inp.addEventListener(“keydown”, function(e) {
-if (e.key === “Enter”) doNC(inp);
-});
-row.appendChild(inp);
-
-```
-var g = el("button","go");
-g.textContent = "Create";
-g.addEventListener("click", function() { doNC(inp); });
-row.appendChild(g);
-
-var x = el("button","xx");
-x.textContent = "\u2715";
-x.addEventListener("click", function() { showNC = false; renderNC(); });
-row.appendChild(x);
-
-nc.appendChild(row);
-setTimeout(function(){ inp.focus(); }, 0);
-```
-
-} else {
-var btn = el(“button”,“ncbtn”);
-btn.appendChild(plusSvg());
-btn.appendChild(document.createTextNode(” Add new category”));
-btn.addEventListener(“click”, function() { showNC = true; renderNC(); });
-nc.appendChild(btn);
-}
-}
-
-function doNC(inp) {
-var v = inp.value.trim();
-if (!v) return;
-cats.push({ name: v, items: [] });
-showNC = false;
-addingTo = cats.length - 1;
-render();
-}
-
-render();
-</script>
-
+<script src="app.js"></script>
 </body>
 </html>
