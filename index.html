@@ -2,8 +2,8 @@
 
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moving Abroad — Packing Checklist</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -14,250 +14,319 @@
       color: #2a2420;
       padding: 32px 16px;
     }
-    .container { max-width: 540px; margin: 0 auto; }
-    .header { margin-bottom: 32px; border-bottom: 3px solid #2a2420; padding-bottom: 20px; }
-    .header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; text-transform: uppercase; }
-    .subtitle { margin: 4px 0 16px; font-size: 13px; color: #8a7e74; letter-spacing: 2px; text-transform: uppercase; }
-    .progress-row { display: flex; align-items: center; gap: 12px; }
-    .progress-bar { flex: 1; height: 8px; background: #ddd5cb; border-radius: 4px; overflow: hidden; }
-    .progress-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease, background 0.3s ease; }
-    .progress-count { font-size: 13px; font-weight: 700; min-width: 80px; text-align: right; }
-    .category { margin-bottom: 28px; }
-    .cat-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; border-bottom: 1px solid #ccc3b8; padding-bottom: 4px; }
-    .cat-header h2 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; transition: color 0.2s; }
-    .cat-header h2.done { color: #5a8a5e; text-decoration: line-through; }
-    .cat-count { font-size: 11px; color: #8a7e74; }
-    .item { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px dotted #ddd5cb; }
-    .checkbox {
-      width: 22px; height: 22px; border-radius: 4px; border: 2px solid #b5aa9e;
-      background: transparent; color: #fff; cursor: pointer; display: flex;
-      align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s ease;
-    }
-    .checkbox.checked { border-color: #5a8a5e; background: #5a8a5e; }
-    .checkbox svg { display: none; }
-    .checkbox.checked svg { display: block; }
-    .item-name { flex: 1; font-size: 14px; transition: all 0.15s ease; }
-    .item-name.checked { color: #8a7e74; text-decoration: line-through; }
-    .del-btn { background: none; border: none; color: #c4b8ac; cursor: pointer; padding: 4px; border-radius: 4px; display: flex; align-items: center; }
-    .del-btn:hover { color: #c47a4a; }
-    .add-btn {
-      display: flex; align-items: center; gap: 6px; margin-top: 6px; padding: 4px 0;
-      background: none; border: none; color: #b5aa9e; font-size: 12px;
-      font-family: inherit; cursor: pointer; letter-spacing: 0.5px;
-    }
-    .add-btn:hover { color: #c47a4a; }
-    .add-row { display: flex; gap: 8px; margin-top: 8px; }
-    .add-row input {
-      flex: 1; padding: 6px 10px; font-size: 13px; font-family: inherit;
-      border: 1.5px solid #c4b8ac; border-radius: 4px; background: #faf7f4; outline: none;
-    }
-    .add-row input:focus { border-color: #c47a4a; }
-    .btn-go {
-      padding: 6px 14px; font-size: 12px; font-weight: 700; font-family: inherit;
-      background: #2a2420; color: #f5f0eb; border: none; border-radius: 4px;
-      cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
-    }
-    .btn-x {
-      padding: 6px 10px; font-size: 12px; font-family: inherit; background: none;
-      border: 1.5px solid #c4b8ac; border-radius: 4px; cursor: pointer; color: #8a7e74;
-    }
-    .new-cat { margin-top: 16px; padding-top: 16px; border-top: 2px solid #2a2420; }
-    .new-cat-btn {
-      display: flex; align-items: center; gap: 8px; padding: 8px 0; background: none;
-      border: none; color: #8a7e74; font-size: 13px; font-family: inherit;
-      cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-    }
-    .new-cat-btn:hover { color: #c47a4a; }
-    .new-cat-row { display: flex; gap: 8px; }
-    .new-cat-row input {
-      flex: 1; padding: 8px 10px; font-size: 13px; font-family: inherit;
-      border: 1.5px solid #c4b8ac; border-radius: 4px; background: #faf7f4; outline: none;
-    }
-    .new-cat-row input:focus { border-color: #c47a4a; }
-    .new-cat-row .btn-go { padding: 8px 16px; }
-    .new-cat-row .btn-x { padding: 8px 10px; }
-    .tip { margin-top: 32px; font-size: 11px; color: #b5aa9e; text-align: center; letter-spacing: 0.5px; }
+    .wrap { max-width: 540px; margin: 0 auto; }
+    .hdr { margin-bottom: 32px; border-bottom: 3px solid #2a2420; padding-bottom: 20px; }
+    .hdr h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; text-transform: uppercase; }
+    .sub { margin: 4px 0 16px; font-size: 13px; color: #8a7e74; letter-spacing: 2px; text-transform: uppercase; }
+    .prow { display: flex; align-items: center; gap: 12px; }
+    .pbar { flex: 1; height: 8px; background: #ddd5cb; border-radius: 4px; overflow: hidden; }
+    .pfill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+    .pcnt { font-size: 13px; font-weight: 700; min-width: 80px; text-align: right; }
+
+```
+.cat { margin-bottom: 28px; }
+.cat-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; border-bottom: 1px solid #ccc3b8; padding-bottom: 4px; }
+.cat-top h2 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+.cat-top h2.alldone { color: #5a8a5e; text-decoration: line-through; }
+.cat-top span { font-size: 11px; color: #8a7e74; }
+
+.row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px dotted #ddd5cb; }
+.cb {
+  width: 22px; height: 22px; border-radius: 4px; border: 2px solid #b5aa9e;
+  background: transparent; color: #fff; cursor: pointer; display: flex;
+  align-items: center; justify-content: center; flex-shrink: 0;
+}
+.cb.on { border-color: #5a8a5e; background: #5a8a5e; }
+.cb svg { visibility: hidden; }
+.cb.on svg { visibility: visible; }
+.lbl { flex: 1; font-size: 14px; }
+.lbl.on { color: #8a7e74; text-decoration: line-through; }
+.rm { background: none; border: none; color: #c4b8ac; cursor: pointer; padding: 4px; display: flex; align-items: center; }
+.rm:hover { color: #c47a4a; }
+
+.addbtn {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 4px 0;
+  background: none; border: none; color: #b5aa9e; font-size: 12px;
+  font-family: inherit; cursor: pointer; letter-spacing: 0.5px;
+}
+.addbtn:hover { color: #c47a4a; }
+
+.irow { display: flex; gap: 8px; margin-top: 8px; }
+.irow input {
+  flex: 1; padding: 6px 10px; font-size: 13px; font-family: inherit;
+  border: 1.5px solid #c4b8ac; border-radius: 4px; background: #faf7f4; outline: none;
+}
+.irow input:focus { border-color: #c47a4a; }
+.go {
+  padding: 6px 14px; font-size: 12px; font-weight: 700; font-family: inherit;
+  background: #2a2420; color: #f5f0eb; border: none; border-radius: 4px;
+  cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+}
+.xx {
+  padding: 6px 10px; font-size: 12px; font-family: inherit; background: none;
+  border: 1.5px solid #c4b8ac; border-radius: 4px; cursor: pointer; color: #8a7e74;
+}
+
+.nc { margin-top: 16px; padding-top: 16px; border-top: 2px solid #2a2420; }
+.ncbtn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; background: none;
+  border: none; color: #8a7e74; font-size: 13px; font-family: inherit;
+  cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+}
+.ncbtn:hover { color: #c47a4a; }
+.ncrow { display: flex; gap: 8px; }
+.ncrow input {
+  flex: 1; padding: 8px 10px; font-size: 13px; font-family: inherit;
+  border: 1.5px solid #c4b8ac; border-radius: 4px; background: #faf7f4; outline: none;
+}
+.ncrow input:focus { border-color: #c47a4a; }
+.ncrow .go { padding: 8px 16px; }
+.ncrow .xx { padding: 8px 10px; }
+.tip { margin-top: 32px; font-size: 11px; color: #b5aa9e; text-align: center; letter-spacing: 0.5px; }
+```
+
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Moving Abroad</h1>
-      <p class="subtitle">Packing Checklist</p>
-      <div class="progress-row">
-        <div class="progress-bar"><div class="progress-fill" id="pFill"></div></div>
-        <span class="progress-count" id="pCount"></span>
-      </div>
+<div class="wrap">
+  <div class="hdr">
+    <h1>Moving Abroad</h1>
+    <p class="sub">Packing Checklist</p>
+    <div class="prow">
+      <div class="pbar"><div class="pfill" id="pf"></div></div>
+      <span class="pcnt" id="pc"></span>
     </div>
-    <div id="cats"></div>
-    <div class="new-cat" id="newCat"></div>
-    <p class="tip">Tip: wear your bulkiest coat &amp; shoes on the plane</p>
   </div>
+  <div id="main"></div>
+  <div class="nc" id="nc"></div>
+  <p class="tip">Tip: wear your bulkiest coat &amp; shoes on the plane</p>
+</div>
 <script>
-(function() {
-  var INIT = {
-    "Summer Clothing": ["Lightweight tops (4\u20135)","Shorts (2)","Light pants or skirt","Sundress / going-out piece"],
-    "Winter Clothing": ["Coat or parka","Fleece or sweater","Long-sleeve shirts (2\u20133)","Pants / jeans (2)","Thermals or warm leggings","Scarf, beanie & gloves"],
-    "Year-Round Essentials": ["Underwear (7 days)","Socks (7 days)","Pajamas","Formal / interview outfit","Workout clothes","Sturdy shoes (wear on plane)","Light shoes or sneakers","Sandals / flip-flops"],
-    "Toiletries & Health": ["Toothbrush & toothpaste","Deodorant","Shampoo & conditioner","Sunscreen","Razor","Nail clippers","Prescriptions & medications","First aid basics","Quick-dry towel"],
-    "Documents & Money": ["Passport","Visa paperwork","Work contract / offer letter","Diplomas & certificates","Medical records","Digital backups of all docs","Credit / debit cards (1\u20132)","Small amount of local cash"],
-    "Tech & Electronics": ["Phone & charger","Power adapter (destination type)","Portable battery pack","Earbuds / headphones","Laptop + charger (if needed)"],
-    "Practical Extras": ["Daypack or packable tote","Packing cubes","Reusable water bottle","Travel lock","Earplugs & sleep mask","Ziplock bags","Pen"]
-  };
+var cats = [
+  { name:"Summer Clothing", items:[
+    {n:"Lightweight tops (4\u20135)",c:false},{n:"Shorts (2)",c:false},
+    {n:"Light pants or skirt",c:false},{n:"Sundress / going-out piece",c:false}
+  ]},
+  { name:"Winter Clothing", items:[
+    {n:"Coat or parka",c:false},{n:"Fleece or sweater",c:false},
+    {n:"Long-sleeve shirts (2\u20133)",c:false},{n:"Pants / jeans (2)",c:false},
+    {n:"Thermals or warm leggings",c:false},{n:"Scarf, beanie & gloves",c:false}
+  ]},
+  { name:"Year-Round Essentials", items:[
+    {n:"Underwear (7 days)",c:false},{n:"Socks (7 days)",c:false},{n:"Pajamas",c:false},
+    {n:"Formal / interview outfit",c:false},{n:"Workout clothes",c:false},
+    {n:"Sturdy shoes (wear on plane)",c:false},{n:"Light shoes or sneakers",c:false},
+    {n:"Sandals / flip-flops",c:false}
+  ]},
+  { name:"Toiletries & Health", items:[
+    {n:"Toothbrush & toothpaste",c:false},{n:"Deodorant",c:false},
+    {n:"Shampoo & conditioner",c:false},{n:"Sunscreen",c:false},{n:"Razor",c:false},
+    {n:"Nail clippers",c:false},{n:"Prescriptions & medications",c:false},
+    {n:"First aid basics",c:false},{n:"Quick-dry towel",c:false}
+  ]},
+  { name:"Documents & Money", items:[
+    {n:"Passport",c:false},{n:"Visa paperwork",c:false},{n:"Work contract / offer letter",c:false},
+    {n:"Diplomas & certificates",c:false},{n:"Medical records",c:false},
+    {n:"Digital backups of all docs",c:false},{n:"Credit / debit cards (1\u20132)",c:false},
+    {n:"Small amount of local cash",c:false}
+  ]},
+  { name:"Tech & Electronics", items:[
+    {n:"Phone & charger",c:false},{n:"Power adapter (destination type)",c:false},
+    {n:"Portable battery pack",c:false},{n:"Earbuds / headphones",c:false},
+    {n:"Laptop + charger (if needed)",c:false}
+  ]},
+  { name:"Practical Extras", items:[
+    {n:"Daypack or packable tote",c:false},{n:"Packing cubes",c:false},
+    {n:"Reusable water bottle",c:false},{n:"Travel lock",c:false},
+    {n:"Earplugs & sleep mask",c:false},{n:"Ziplock bags",c:false},{n:"Pen",c:false}
+  ]}
+];
 
-var data = {};
-var catOrder = [];
-Object.keys(INIT).forEach(function(cat) {
-catOrder.push(cat);
-data[cat] = INIT[cat].map(function(n) { return { name: n, checked: false }; });
-});
+var addingTo = -1;
+var showNC = false;
 
-var addingTo = null;
-var showNewCat = false;
+function el(tag, cls) {
+var e = document.createElement(tag);
+if (cls) e.className = cls;
+return e;
+}
 
-var IC = ‘<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>’;
-var IT = ‘<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4h10M5 4V2.5a.5.5 0 01.5-.5h3a.5.5 0 01.5.5V4m1.5 0v7.5a1 1 0 01-1 1h-5a1 1 0 01-1-1V4h8z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>’;
-var IP = ‘<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>’;
+function svg(path, w, sw) {
+var s = document.createElementNS(“http://www.w3.org/2000/svg”,“svg”);
+s.setAttribute(“width”,“14”);
+s.setAttribute(“height”,“14”);
+s.setAttribute(“viewBox”,“0 0 14 14”);
+s.setAttribute(“fill”,“none”);
+var p = document.createElementNS(“http://www.w3.org/2000/svg”,“path”);
+p.setAttribute(“d”, path);
+p.setAttribute(“stroke”,“currentColor”);
+p.setAttribute(“stroke-width”, sw || “2”);
+p.setAttribute(“stroke-linecap”,“round”);
+p.setAttribute(“stroke-linejoin”,“round”);
+s.appendChild(p);
+return s;
+}
 
-function esc(s) { var d = document.createElement(“div”); d.textContent = s; return d.innerHTML; }
+function checkSvg() { return svg(“M2.5 7.5L5.5 10.5L11.5 3.5”); }
+function trashSvg() { return svg(“M2 4h10M5 4V2.5a.5.5 0 01.5-.5h3a.5.5 0 01.5.5V4m1.5 0v7.5a1 1 0 01-1 1h-5a1 1 0 01-1-1V4h8z”,“1.2”); }
+function plusSvg() { return svg(“M7 2v10M2 7h10”); }
 
 function progress() {
-var t = 0, c = 0;
-catOrder.forEach(function(cat) {
-if (!data[cat]) return;
-t += data[cat].length;
-data[cat].forEach(function(i) { if (i.checked) c++; });
+var t=0, c=0;
+cats.forEach(function(cat){
+t += cat.items.length;
+cat.items.forEach(function(it){ if(it.c) c++; });
 });
-var pct = t ? Math.round(c / t * 100) : 0;
-var fill = document.getElementById(“pFill”);
-fill.style.width = pct + “%”;
-fill.style.background = pct === 100 ? “#5a8a5e” : “#c47a4a”;
-document.getElementById(“pCount”).textContent = c + “ / “ + t;
+var pct = t ? Math.round(c/t*100) : 0;
+var f = document.getElementById(“pf”);
+f.style.width = pct+”%”;
+f.style.background = pct===100 ? “#5a8a5e” : “#c47a4a”;
+document.getElementById(“pc”).textContent = c+” / “+t;
 }
 
 function render() {
-var h = “”;
-catOrder.forEach(function(cat, ci) {
-if (!data[cat]) return;
-var items = data[cat];
+var main = document.getElementById(“main”);
+main.innerHTML = “”;
+
+cats.forEach(function(cat, ci) {
+var sec = el(“div”,“cat”);
 var cc = 0;
-items.forEach(function(i) { if (i.checked) cc++; });
-var done = items.length > 0 && cc === items.length;
+cat.items.forEach(function(it){ if(it.c) cc++; });
+var allDone = cat.items.length > 0 && cc === cat.items.length;
 
 ```
-  h += '<div class="category">';
-  h += '<div class="cat-header"><h2' + (done ? ' class="done"' : '') + '>' + esc(cat) + '</h2>';
-  h += '<span class="cat-count">' + cc + '/' + items.length + '</span></div>';
+// header
+var top = el("div","cat-top");
+var h2 = el("h2");
+h2.textContent = cat.name;
+if (allDone) h2.className = "alldone";
+var cnt = el("span");
+cnt.textContent = cc+"/"+cat.items.length;
+top.appendChild(h2);
+top.appendChild(cnt);
+sec.appendChild(top);
 
-  items.forEach(function(item, idx) {
-    h += '<div class="item">';
-    h += '<button class="checkbox' + (item.checked ? ' checked' : '') + '" data-cat="' + ci + '" data-idx="' + idx + '">' + IC + '</button>';
-    h += '<span class="item-name' + (item.checked ? ' checked' : '') + '">' + esc(item.name) + '</span>';
-    h += '<button class="del-btn" data-cat="' + ci + '" data-idx="' + idx + '">' + IT + '</button>';
-    h += '</div>';
+// items
+cat.items.forEach(function(it, idx) {
+  var row = el("div","row");
+
+  var cb = el("button", it.c ? "cb on" : "cb");
+  cb.appendChild(checkSvg());
+  cb.addEventListener("click", function() {
+    it.c = !it.c;
+    render();
   });
+  row.appendChild(cb);
 
-  if (addingTo === cat) {
-    h += '<div class="add-row"><input id="addInp" placeholder="New item..." />';
-    h += '<button class="btn-go" id="addGo" data-cat="' + ci + '">Add</button>';
-    h += '<button class="btn-x" id="addCancel">\u2715</button></div>';
-  } else {
-    h += '<button class="add-btn" data-cat="' + ci + '">' + IP + ' Add item</button>';
-  }
-  h += '</div>';
+  var lbl = el("span", it.c ? "lbl on" : "lbl");
+  lbl.textContent = it.n;
+  row.appendChild(lbl);
+
+  var rm = el("button","rm");
+  rm.appendChild(trashSvg());
+  rm.addEventListener("click", function() {
+    cat.items.splice(idx, 1);
+    if (cat.items.length === 0) cats.splice(ci, 1);
+    render();
+  });
+  row.appendChild(rm);
+
+  sec.appendChild(row);
 });
 
-document.getElementById("cats").innerHTML = h;
-progress();
+// add item
+if (addingTo === ci) {
+  var irow = el("div","irow");
+  var inp = el("input");
+  inp.placeholder = "New item...";
+  inp.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") doAdd(cat, inp);
+  });
+  irow.appendChild(inp);
 
-if (addingTo) {
-  var inp = document.getElementById("addInp");
-  if (inp) inp.focus();
-}
-renderNewCat();
-```
+  var gobtn = el("button","go");
+  gobtn.textContent = "Add";
+  gobtn.addEventListener("click", function() { doAdd(cat, inp); });
+  irow.appendChild(gobtn);
 
-}
+  var xbtn = el("button","xx");
+  xbtn.textContent = "\u2715";
+  xbtn.addEventListener("click", function() { addingTo = -1; render(); });
+  irow.appendChild(xbtn);
 
-function renderNewCat() {
-var sec = document.getElementById(“newCat”);
-if (showNewCat) {
-sec.innerHTML = ‘<div class="new-cat-row"><input id="ncInp" placeholder="Category name..." />’ +
-‘<button class="btn-go" id="ncGo">Create</button>’ +
-‘<button class="btn-x" id="ncCancel">\u2715</button></div>’;
-document.getElementById(“ncInp”).focus();
+  sec.appendChild(irow);
+  main.appendChild(sec);
+  setTimeout(function(){ inp.focus(); }, 0);
 } else {
-sec.innerHTML = ‘<button class="new-cat-btn" id="ncBtn">’ + IP + ’ Add new category</button>’;
-}
-}
-
-// Event delegation
-document.addEventListener(“click”, function(e) {
-var t = e.target.closest(“button”);
-if (!t) return;
-
-```
-if (t.classList.contains("checkbox")) {
-  var ci = +t.dataset.cat, idx = +t.dataset.idx;
-  var cat = catOrder[ci];
-  data[cat][idx].checked = !data[cat][idx].checked;
-  render();
-} else if (t.classList.contains("del-btn")) {
-  var ci = +t.dataset.cat, idx = +t.dataset.idx;
-  var cat = catOrder[ci];
-  data[cat].splice(idx, 1);
-  if (data[cat].length === 0) { delete data[cat]; catOrder.splice(ci, 1); }
-  render();
-} else if (t.classList.contains("add-btn")) {
-  addingTo = catOrder[+t.dataset.cat];
-  render();
-} else if (t.id === "addGo") {
-  commitAdd();
-} else if (t.id === "addCancel") {
-  addingTo = null;
-  render();
-} else if (t.id === "ncBtn") {
-  showNewCat = true;
-  renderNewCat();
-} else if (t.id === "ncGo") {
-  commitNewCat();
-} else if (t.id === "ncCancel") {
-  showNewCat = false;
-  renderNewCat();
+  var ab = el("button","addbtn");
+  ab.appendChild(plusSvg());
+  ab.appendChild(document.createTextNode(" Add item"));
+  ab.addEventListener("click", function() { addingTo = ci; render(); });
+  sec.appendChild(ab);
+  main.appendChild(sec);
 }
 ```
 
 });
 
-document.addEventListener(“keydown”, function(e) {
-if (e.key === “Enter”) {
-if (e.target.id === “addInp”) commitAdd();
-if (e.target.id === “ncInp”) commitNewCat();
+progress();
+renderNC();
 }
+
+function doAdd(cat, inp) {
+var v = inp.value.trim();
+if (!v) return;
+cat.items.push({n: v, c: false});
+addingTo = -1;
+render();
+}
+
+function renderNC() {
+var nc = document.getElementById(“nc”);
+nc.innerHTML = “”;
+if (showNC) {
+var row = el(“div”,“ncrow”);
+var inp = el(“input”);
+inp.placeholder = “Category name…”;
+inp.addEventListener(“keydown”, function(e) {
+if (e.key === “Enter”) doNC(inp);
 });
+row.appendChild(inp);
 
-function commitAdd() {
-var inp = document.getElementById(“addInp”);
-var val = inp ? inp.value.trim() : “”;
-if (!val) return;
-data[addingTo].push({ name: val, checked: false });
-addingTo = null;
+```
+var g = el("button","go");
+g.textContent = "Create";
+g.addEventListener("click", function() { doNC(inp); });
+row.appendChild(g);
+
+var x = el("button","xx");
+x.textContent = "\u2715";
+x.addEventListener("click", function() { showNC = false; renderNC(); });
+row.appendChild(x);
+
+nc.appendChild(row);
+setTimeout(function(){ inp.focus(); }, 0);
+```
+
+} else {
+var btn = el(“button”,“ncbtn”);
+btn.appendChild(plusSvg());
+btn.appendChild(document.createTextNode(” Add new category”));
+btn.addEventListener(“click”, function() { showNC = true; renderNC(); });
+nc.appendChild(btn);
+}
+}
+
+function doNC(inp) {
+var v = inp.value.trim();
+if (!v) return;
+cats.push({ name: v, items: [] });
+showNC = false;
+addingTo = cats.length - 1;
 render();
 }
 
-function commitNewCat() {
-var inp = document.getElementById(“ncInp”);
-var val = inp ? inp.value.trim() : “”;
-if (!val || data[val]) return;
-data[val] = [];
-catOrder.push(val);
-showNewCat = false;
-addingTo = val;
 render();
-}
-
-render();
-})();
 </script>
 
 </body>
